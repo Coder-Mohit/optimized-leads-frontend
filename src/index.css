@@ -1,0 +1,161 @@
+@keyframes fadeLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes fadeRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes nav {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+@keyframes progress {
+  from {
+    width: 0;
+  }
+  to {
+    width: 88%;
+  }
+}
+
+.animate-fadeLeft {
+  animation: fadeLeft 0.8s ease forwards;
+}
+.animate-fadeRight {
+  animation: fadeRight 0.8s ease forwards;
+}
+.animate-nav {
+  animation: nav 0.5s ease forwards;
+}
+.animate-float {
+  animation: float 4.5s ease-in-out infinite;
+}
+.animate-progress {
+  animation: progress 1.5s ease forwards;
+}
+
+@keyframes orbFloat1 {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(18px, -22px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes orbFloat2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-20px, 18px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes orbFloat3 {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(14px, 20px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(12px);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.group:hover .orb {
+  opacity: 0.9;
+}
+
+@keyframes trafficRed {
+  0%,
+  33%,
+  100% {
+    opacity: 0.3;
+  }
+  10%,
+  30% {
+    opacity: 1;
+  }
+}
+
+@keyframes trafficYellow {
+  0%,
+  33% {
+    opacity: 0.3;
+  }
+  43%,
+  63% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes trafficGreen {
+  0%,
+  66% {
+    opacity: 0.3;
+  }
+  76%,
+  96% {
+    opacity: 1;
+  }
+}
+
+.traffic-red {
+  animation: trafficRed 3s infinite;
+}
+
+.traffic-yellow {
+  animation: trafficYellow 3s infinite;
+}
+
+.traffic-green {
+  animation: trafficGreen 3s infinite;
+}
