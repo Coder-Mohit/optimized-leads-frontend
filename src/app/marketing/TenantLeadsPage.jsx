@@ -1,9 +1,9 @@
-import ContactForm from "../components/common/ContactForm";
-import TenantLeadsHero from "../components/RealState/TenantLeads/TenantLeadsHero";
-import ServicesSection from "../components/studyAbroad/ServicesSection";
-import HowItWorks from "../components/studyAbroad/HowItWorks";
-import PartnerSuccessStories from "../components/studyAbroad/PartnerSuccessStories";
-import WhyPartnerWithOptimizedLeads from "../components/studyAbroad/WhyPartnerWithOptimizedLeads";
+import ContactForm from "../../components/common/ContactForm";
+import TenantLeadsHero from "../../components/RealState/TenantLeads/TenantLeadsHero";
+import ServicesSection from "../../components/studyAbroad/ServicesSection";
+import HowItWorks from "../../components/studyAbroad/HowItWorks";
+import PartnerSuccessStories from "../../components/studyAbroad/PartnerSuccessStories";
+import WhyPartnerWithOptimizedLeads from "../../components/studyAbroad/WhyPartnerWithOptimizedLeads";
 import { Target, ShieldCheck, BarChart3, Zap } from "lucide-react";
 
 const tenantLeadsServices = [

@@ -1,10 +1,10 @@
-import PricingSection from "../components/common/PricingSection";
-import ForexHero from "../components/ForexMarket/ForexHero";
-import ServicesSection from "../components/studyAbroad/ServicesSection";
-import HowItWorks from "../components/studyAbroad/HowItWorks";
-import PartnerSuccessStories from "../components/studyAbroad/PartnerSuccessStories";
-import ContactForm from "../components/common/ContactForm";
-import WhyPartnerWithOptimizedLeads from "../components/studyAbroad/WhyPartnerWithOptimizedLeads";
+import PricingSection from "../../components/common/PricingSection";
+import ForexHero from "../../components/ForexMarket/ForexHero";
+import ServicesSection from "../../components/studyAbroad/ServicesSection";
+import HowItWorks from "../../components/studyAbroad/HowItWorks";
+import PartnerSuccessStories from "../../components/studyAbroad/PartnerSuccessStories";
+import ContactForm from "../../components/common/ContactForm";
+import WhyPartnerWithOptimizedLeads from "../../components/studyAbroad/WhyPartnerWithOptimizedLeads";
 import { Zap, Crown, Star, Target, ShieldCheck, BarChart3 } from "lucide-react";
 
 const forexServices = [

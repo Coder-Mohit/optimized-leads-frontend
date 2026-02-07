@@ -1,13 +1,13 @@
-import PricingSection from "../components/common/PricingSection";
-import BuyerLeadsHero from "../components/RealState/BuyerLeads/BuyerLeadsHero";
-import ServicesSection from "../components/studyAbroad/ServicesSection";
-import HowItWorks from "../components/studyAbroad/HowItWorks";
-import PartnerSuccessStories from "../components/studyAbroad/PartnerSuccessStories";
+import PricingSection from "../../components/common/PricingSection";
+import BuyerLeadsHero from "../../components/RealState/BuyerLeads/BuyerLeadsHero";
+import ServicesSection from "../../components/studyAbroad/ServicesSection";
+import HowItWorks from "../../components/studyAbroad/HowItWorks";
+import PartnerSuccessStories from "../../components/studyAbroad/PartnerSuccessStories";
 import { Star, Crown, Zap, Target, ShieldCheck, BarChart3 } from "lucide-react";
-import IndustriesCTASection from "../components/IndustriesCTASection";
-import StepsSection from "../components/StepsSection";
-import ContactForm from "../components/common/ContactForm";
-import FinalCTASection from "../components/FinalCTASection";
+import IndustriesCTASection from "../../components/marketing/IndustriesCTASection";
+import StepsSection from "../../components/marketing/StepsSection";
+import ContactForm from "../../components/common/ContactForm";
+import FinalCTASection from "../../components/marketing/FinalCTASection";
 
 export const buyerLeadsServices = [
   {

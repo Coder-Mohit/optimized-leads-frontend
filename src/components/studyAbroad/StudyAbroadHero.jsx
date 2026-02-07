@@ -1,10 +1,10 @@
 export default function StudyAbroadHero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-r from-indigo-600 to-purple-600 px-4 pt-28 pb-24 text-center px-20">
+    <section className="relative overflow-hidden bg-gradient-to-r from-indigo-600 to-purple-600 pt-28 pb-24 text-center">
       {/* soft highlight */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.25),transparent_60%)]" />
 
-      <div className="relative mx-auto max-w-7xl">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Badge */}
         <div className="mb-8 flex justify-center">
           <span className="inline-flex items-center gap-2 rounded-full bg-white/20 px-5 py-2 text-sm font-medium text-white backdrop-blur">

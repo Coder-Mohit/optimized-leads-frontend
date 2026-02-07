@@ -16,7 +16,7 @@ export default function Footer() {
   return (
     <footer className="bg-slate-950 text-slate-300">
       {/* TOP */}
-      <div className="mx-auto max-w-7xl px-6 py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* BRAND */}
           <div>
@@ -115,7 +115,7 @@ export default function Footer() {
         {/* BOTTOM */}
         <div
           className="mt-12 flex flex-col items-center justify-between gap-6
-          border-t border-slate-800 pt-8 md:flex-row"
+          border-t border-slate-800 pt-8 px-4 sm:px-6 lg:px-8 md:flex-row"
         >
           <p className="text-sm text-slate-400">
             © 2024 OptimizedLeads. All rights reserved.

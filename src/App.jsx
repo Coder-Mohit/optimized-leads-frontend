@@ -1,70 +1,62 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/common/Navbar";
-import Footer from "./components/common/Footer";
-import ScrollToTop from "./components/common/ScrollToTop";
-import Hero from "./components/Hero";
-import IndustriesSection from "./components/IndustriesSection";
-import StepsSection from "./components/StepsSection";
-import HomePage from "./pages/HomePage";
-import StudyAbroadPage from "./pages/StudyAbroadPage";
-import ForexMarketPage from "./pages/ForexMarketPage";
-import BuyerLeadsPage from "./pages/BuyerLeadsPage";
-import TenantLeadsPage from "./pages/TenantLeadsPage";
-import OnlineMBAServicePage from "./pages/OnlineMBAServicePage";
-import CertificationPage from "./pages/CertificationPage";
-import PhDPage from "./pages/PhDPage";
-import AboutPage from "./pages/AboutPage";
-import ContactPage from "./pages/ContactPage";
-import LoginPage from "./pages/LoginPage";
-import StartFreeTrialPage from "./pages/StartFreeTrialPage";
-import BlogPage from "./pages/BlogPage";
+import { Routes, Route } from "react-router-dom";
 
-/* --------- PAGES (temporary placeholders) --------- */
-function Placeholder({ title }) {
-  return (
-    <div className="min-h-screen flex items-center justify-center text-3xl font-bold">
-      {title}
-    </div>
-  );
-}
+/* Layouts */
+import MarketingLayout from "./layouts/MarketingLayout";
+import DashboardLayout from "./layouts/DashboardLayout";
+
+/* Marketing Pages */
+import HomePage from "./app/marketing/HomePage";
+import StudyAbroadPage from "./app/marketing/StudyAbroadPage";
+import ForexMarketPage from "./app/marketing/ForexMarketPage";
+import BuyerLeadsPage from "./app/marketing/BuyerLeadsPage";
+import TenantLeadsPage from "./app/marketing/TenantLeadsPage";
+import OnlineMBAServicePage from "./app/marketing/OnlineMBAServicePage";
+import CertificationPage from "./app/marketing/CertificationPage";
+import PhDPage from "./app/marketing/PhDPage";
+import AboutPage from "./app/marketing/AboutPage";
+import ContactPage from "./app/marketing/ContactPage";
+import LoginPage from "./app/marketing/LoginPage";
+import StartFreeTrialPage from "./app/marketing/StartFreeTrialPage";
+import BlogPage from "./app/marketing/BlogPage";
+
+/* Dashboard Pages */
+import SubscriberDashboard from "./app/dashboard/subscriber/SubscriberDashboard";
+import Analytics from "./app/dashboard/subscriber/Analytics";
+import Leads from "./app/dashboard/subscriber/Leads";
+import Tickets from "./app/dashboard/subscriber/Tickets";
+import Calendar from "./app/dashboard/subscriber/Calendar";
+import Tasks from "./app/dashboard/subscriber/Tasks";
 
 export default function App() {
   return (
-    <>
-      {/* SCROLL TO TOP ON ROUTE CHANGE */}
-      <ScrollToTop />
-
-      {/* NAVBAR ALWAYS ON TOP */}
-      <Navbar />
-
-      {/* ROUTES */}
-      <Routes>
-        {/* HOME */}
+    <Routes>
+      {/* MARKETING SITE */}
+      <Route element={<MarketingLayout />}>
         <Route path="/" element={<HomePage />} />
-
-        {/* REAL ESTATE */}
         <Route path="/buyers_leads" element={<BuyerLeadsPage />} />
         <Route path="/tenant_leads" element={<TenantLeadsPage />} />
-
-        {/* STUDY ABROAD */}
         <Route path="/study_abroad" element={<StudyAbroadPage />} />
-
-        {/* EDUCATION */}
         <Route path="/online_mba" element={<OnlineMBAServicePage />} />
         <Route path="/certification" element={<CertificationPage />} />
         <Route path="/phd_doctorate" element={<PhDPage />} />
-
-        {/* OTHER */}
         <Route path="/forex_trader" element={<ForexMarketPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/blogs" element={<BlogPage />} />
-
-        {/* AUTH */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/start_free_trial" element={<StartFreeTrialPage />} />
-      </Routes>
-      <Footer />
-    </>
+      </Route>
+
+      {/* DASHBOARD */}
+      <Route path="/dashboard" element={<DashboardLayout />}>
+        <Route path="" element={<SubscriberDashboard />} />
+        <Route path="subscriber" element={<SubscriberDashboard />} />
+        <Route path="subscriber/analytics" element={<Analytics />} />
+        <Route path="subscriber/leads" element={<Leads />} />
+        <Route path="subscriber/tickets" element={<Tickets />} />
+        <Route path="subscriber/calendar" element={<Calendar />} />
+        <Route path="subscriber/tasks" element={<Tasks />} />
+      </Route>
+    </Routes>
   );
 }

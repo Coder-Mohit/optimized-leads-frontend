@@ -1,11 +1,16 @@
-import HowItWorks from "../components/studyAbroad/HowItWorks";
-import PartnerSuccessStories from "../components/studyAbroad/PartnerSuccessStories";
-import ServicesSection from "../components/studyAbroad/ServicesSection";
-import StudyAbroadHero from "../components/studyAbroad/StudyAbroadHero";
-import WhyPartnerWithOptimizedLeads from "../components/studyAbroad/WhyPartnerWithOptimizedLeads";
+import ContactForm from "../../components/common/ContactForm";
+import OnlineMBAHero from "../../components/Education/OnlineMBAHero";
+import HowItWorks from "../../components/studyAbroad/HowItWorks";
+import PartnerSuccessStories from "../../components/studyAbroad/PartnerSuccessStories";
+import ServicesSection from "../../components/studyAbroad/ServicesSection";
+import WhyPartnerWithOptimizedLeads from "../../components/studyAbroad/WhyPartnerWithOptimizedLeads";
 import { Target, Zap, ShieldCheck, BarChart3 } from "lucide-react";
-// later:
-// import StudyAbroadStats from "../components/studyAbroad/StudyAbroadStats";
+
+// You already have these
+// import PartnerSuccessStories from "../components/common/PartnerSuccessStories";
+// import ServicesSection from "../components/common/ServicesSection";
+// import StepsSection from "../components/common/StepsSection";
+// import ContactFormSection from "../components/common/ContactFormSection";
 
 const services = [
   {
@@ -87,8 +92,9 @@ const stories = [
     name: "Rajesh Kumar",
     role: "Director, Global Education Consultants",
     quote:
-      "OptimizedLeads increased our monthly conversions by 300%. The lead quality is exceptional with an 85% conversion rate.",
-    results: "150+ leads/month, ₹45L revenue increase",
+      "OptimizedLeads MBA leads increased our monthly conversions by 280%. The quality is exceptional with verified contact details and genuine interest.",
+    results: "300+ MBA leads/month, ₹35L revenue increase",
+    rating: 5,
     initial: "R",
     cardBg: "bg-blue-50",
     avatarBg: "bg-blue-200",
@@ -98,8 +104,9 @@ const stories = [
     name: "Priya Sharma",
     role: "Founder, Study Abroad Solutions",
     quote:
-      "The pre-qualified leads save us 70% time on initial screening. Our team can focus on actual counseling and conversions.",
-    results: "200+ leads/month, 90% lead quality score",
+      "The MBA leads come with detailed profiles including work experience and budget. This saves us 75% time on initial screening.",
+    results: "250+ MBA leads/month, 92% lead quality score",
+    rating: 5,
     initial: "P",
     cardBg: "bg-rose-50",
     avatarBg: "bg-rose-200",
@@ -109,8 +116,9 @@ const stories = [
     name: "Amit Patel",
     role: "CEO, International Education Hub",
     quote:
-      "ROI improved by 250% within 3 months. The geographic targeting helps us focus on our service areas effectively.",
-    results: "180+ leads/month, 250% ROI improvement",
+      "ROI improved by 220% within 2 months. The specialization-wise targeting helps us match leads with our MBA programs perfectly.",
+    results: "400+ MBA leads/month, 220% ROI improvement",
+    rating: 5,
     initial: "A",
     cardBg: "bg-emerald-50",
     avatarBg: "bg-emerald-200",
@@ -192,21 +200,22 @@ const features = [
   },
 ];
 
-export default function StudyAbroadPage() {
+export default function OnlineMBAServicePage() {
   return (
     <main>
-      <StudyAbroadHero />
+      <OnlineMBAHero />
       <ServicesSection
-        title="🚀 Complete Lead Generation Solutions"
-        subtitle="End-to-end lead generation services designed specifically for study abroad consultancies."
+        title="🚀 Complete MBA Lead Generation Solutions"
+        subtitle="We provide end-to-end MBA lead generation services specifically designed for education consultancies and MBA program providers."
         services={services}
-      />
+      />{" "}
       <HowItWorks
         steps={steps}
         title="⚡ How Our Lead Generation Works"
         subtitle="Our proven 6-step process ensures you receive only the highest quality, conversion-ready leads."
       />
       <PartnerSuccessStories stories={stories} />
+      <ContactForm industry="Education (Online MBA )" />
       <WhyPartnerWithOptimizedLeads features={features} />
     </main>
   );

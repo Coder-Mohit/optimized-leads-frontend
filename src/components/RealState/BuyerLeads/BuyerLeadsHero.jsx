@@ -6,7 +6,7 @@ export default function BuyerLeadsHero() {
       <div
         className="
     max-w-7xl mx-auto
-    px-4 sm:px-6 md:px-10 lg:px-16
+    px-4 sm:px-6 lg:px-8
     py-16 sm:py-20 md:py-24
     text-center text-white
   "

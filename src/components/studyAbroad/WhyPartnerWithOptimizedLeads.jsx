@@ -2,10 +2,10 @@ import { Handshake, Send } from "lucide-react";
 import { Link } from "react-router-dom";
 export default function WhyPartnerWithOptimizedLeads({ features }) {
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
+    <section className="py-16 bg-gradient-to-br from-gray-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold mb-6">
             <Handshake className="w-4 h-4" />
             Why Partner With OptimizedLeads?
@@ -20,13 +20,13 @@ export default function WhyPartnerWithOptimizedLeads({ features }) {
         </div>
 
         {/* Benefits Grid */}
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-12">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
               <div
                 key={index}
-                className="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 hover:-translate-y-2 border border-gray-100 h-full flex flex-col"
+                className="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 sm:p-8 hover:-translate-y-2 border border-gray-100 h-full flex flex-col"
               >
                 {/* Icon and Title */}
                 <div className="flex items-start gap-4 mb-6">
@@ -82,26 +82,6 @@ export default function WhyPartnerWithOptimizedLeads({ features }) {
               </button>
             </div>
           </div>
-        </div>
-
-        {/* Trust Indicators */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
-          {[
-            { value: "10+", label: "Years Experience" },
-            { value: "500+", label: "Happy Clients" },
-            { value: "50K+", label: "Leads Delivered" },
-            { value: "98%", label: "Client Satisfaction" },
-          ].map((stat, index) => (
-            <div
-              key={index}
-              className="text-center bg-white rounded-xl p-6 shadow-md border border-gray-100"
-            >
-              <div className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-1">
-                {stat.value}
-              </div>
-              <div className="text-sm text-gray-600">{stat.label}</div>
-            </div>
-          ))}
         </div>
       </div>
     </section>

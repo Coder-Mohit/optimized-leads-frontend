@@ -1,29 +1,31 @@
 export default function Hero() {
   return (
-    <main className="relative overflow-hidden bg-gradient-to-br from-gray-50 to-indigo-50 min-h-[90vh] px-8">
-      {/* Subtle grid background */}
-      <div className="absolute inset-0 opacity-[0.06] pointer-events-none">
-        <svg className="w-full h-full" viewBox="0 0 100 100">
-          <defs>
-            <pattern
-              id="grid"
-              width="10"
-              height="10"
-              patternUnits="userSpaceOnUse"
-            >
-              <path
-                d="M10 0 L0 0 0 10"
-                fill="none"
-                stroke="#6366f1"
-                strokeWidth="0.5"
-              />
-            </pattern>
-          </defs>
-          <rect width="100" height="100" fill="url(#grid)" />
-        </svg>
-      </div>
-
-      <div className="relative max-w-7xl mx-auto px-6 py-24">
+    <main
+      className="
+        relative
+        overflow-hidden
+        min-h-[90vh]
+        bg-gradient-to-br
+        from-gray-50
+        to-indigo-50
+      "
+      style={{
+        backgroundImage: `
+          linear-gradient(
+            to right,
+            rgba(180, 190, 255, 0.25) 1px,
+            transparent 1px
+          ),
+          linear-gradient(
+            to bottom,
+            rgba(180, 190, 255, 0.25) 1px,
+            transparent 1px
+          )
+        `,
+        backgroundSize: "64px 64px",
+      }}
+    >
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 py-24">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* LEFT CONTENT */}
           <div className="text-center lg:text-left">

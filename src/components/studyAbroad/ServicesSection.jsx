@@ -5,10 +5,10 @@ export default function ServicesSection({
   bg = "bg-gray-50",
 }) {
   return (
-    <section className={`py-20 ${bg}`}>
+    <section className={`py-10 ${bg}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-100 text-indigo-700 rounded-full text-sm font-semibold mb-6">
             🚀 {title.split("🚀")[1] || title}
           </div>
@@ -23,7 +23,7 @@ export default function ServicesSection({
         </div>
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {services.map((service, index) => (
             <div
               key={index}

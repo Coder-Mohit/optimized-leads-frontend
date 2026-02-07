@@ -2,10 +2,10 @@ import { Star, Trophy } from "lucide-react";
 
 export default function PartnerSuccessStories({ stories }) {
   return (
-    <section className="py-20 bg-gradient-to-br from-indigo-50 to-purple-50">
+    <section className="py-6 sm:py-16 bg-gradient-to-br from-indigo-50 to-purple-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold mb-6">
             <Trophy className="w-4 h-4" />
             Partner Success Stories
@@ -20,11 +20,11 @@ export default function PartnerSuccessStories({ stories }) {
         </div>
 
         {/* Testimonials Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {stories.map((story, index) => (
             <div
               key={index}
-              className="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 hover:-translate-y-2 relative overflow-hidden h-full flex flex-col"
+              className="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 sm:p-8 hover:-translate-y-2 relative overflow-hidden h-full flex flex-col"
             >
               {/* Quote Icon */}
               <div className="absolute top-4 right-4 text-indigo-100 group-hover:text-indigo-200 transition-colors">
@@ -71,26 +71,6 @@ export default function PartnerSuccessStories({ stories }) {
 
               {/* Hover Gradient */}
               <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-            </div>
-          ))}
-        </div>
-
-        {/* Bottom Stats */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
-          {[
-            { value: "500+", label: "Partner Consultancies" },
-            { value: "10,000+", label: "Students Placed" },
-            { value: "94%", label: "Success Rate" },
-            { value: "24/7", label: "Support Available" },
-          ].map((stat, index) => (
-            <div
-              key={index}
-              className="text-center bg-white rounded-xl p-6 shadow-md"
-            >
-              <div className="text-2xl font-bold text-gray-900 mb-1">
-                {stat.value}
-              </div>
-              <div className="text-sm text-gray-600">{stat.label}</div>
             </div>
           ))}
         </div>

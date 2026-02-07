@@ -1,9 +1,12 @@
 import React from "react";
+
 import { useState } from "react";
+
 import { Link, useLocation } from "react-router-dom";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+
   const location = useLocation();
 
   const isActive = (path) => location.pathname === path;
@@ -11,29 +14,33 @@ export default function Navbar() {
   return (
     <>
       {/* ================= HEADER ================= */}
+
       <header className="relative z-50">
         <div className="bg-gradient-to-br from-indigo-600 to-purple-700">
-          <div className="w-full px-8 sm:px-12 lg:px-16">
+          <div className="w-full px-4 sm:px-6 lg:px-16">
             <div className="flex justify-between items-center py-4 md:py-6">
               {/* LOGO */}
+
               <Link to="/" className="flex items-center space-x-3 h-16">
                 <img
                   src="/logo.png"
                   alt="OptimizedLeads"
-                  className="h-12 w-auto filter brightness-0 invert"
+                  className="h-14 w-auto filter brightness-0 invert"
                 />
               </Link>
 
               {/* ================= DESKTOP NAV ================= */}
+
               <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8">
                 {/* REAL ESTATE */}
+
                 <div className="relative group">
                   <div className="flex items-center text-indigo-100 group-hover:text-white font-medium transition-colors">
                     Real Estate
                     <svg
                       className="w-4 h-4 ml-1"
-                      fill="currentColor"
                       viewBox="0 0 24 24"
+                      fill="currentColor"
                     >
                       <path d="M7 10l5 5 5-5z" />
                     </svg>
@@ -46,6 +53,7 @@ export default function Navbar() {
                     >
                       Buyers Leads
                     </Link>
+
                     <Link
                       to="/tenant_leads"
                       className="block px-4 py-2 hover:bg-indigo-50 hover:text-indigo-600"
@@ -67,6 +75,7 @@ export default function Navbar() {
                 </Link>
 
                 {/* EDUCATION */}
+
                 <div className="relative group">
                   <div className="flex items-center text-indigo-100 group-hover:text-white font-medium transition-colors">
                     Education
@@ -86,12 +95,14 @@ export default function Navbar() {
                     >
                       Online MBA
                     </Link>
+
                     <Link
                       to="/certification"
                       className="block px-4 py-2 hover:bg-indigo-50 hover:text-indigo-600"
                     >
                       Certification
                     </Link>
+
                     <Link
                       to="/phd_doctorate"
                       className="block px-4 py-2 hover:bg-indigo-50 hover:text-indigo-600"
@@ -103,8 +114,11 @@ export default function Navbar() {
 
                 {[
                   ["/forex_trader", "Forex Market"],
+
                   ["/about", "About"],
+
                   ["/blogs", "Blog"],
+
                   ["/contact", "Contact"],
                 ].map(([path, label]) => (
                   <Link
@@ -122,6 +136,7 @@ export default function Navbar() {
               </nav>
 
               {/* DESKTOP CTA */}
+
               <div className="hidden lg:flex items-center space-x-4">
                 <Link
                   to="/login"
@@ -129,6 +144,7 @@ export default function Navbar() {
                 >
                   Sign In
                 </Link>
+
                 <Link
                   to="/start_free_trial"
                   className="bg-white text-indigo-600 px-6 py-2 rounded-lg font-semibold shadow"
@@ -138,6 +154,7 @@ export default function Navbar() {
               </div>
 
               {/* MOBILE MENU BUTTON */}
+
               <button
                 className="lg:hidden text-white text-2xl"
                 onClick={() => setMobileOpen(true)}
@@ -150,6 +167,7 @@ export default function Navbar() {
       </header>
 
       {/* ================= OVERLAY ================= */}
+
       <div
         className={`fixed inset-0 bg-black/50 z-40 ${
           mobileOpen ? "opacity-100" : "opacity-0 pointer-events-none"
@@ -158,8 +176,9 @@ export default function Navbar() {
       />
 
       {/* ================= MOBILE SIDEBAR ================= */}
+
       <aside
-        className={`fixed top-0 left-0 z-50 h-full w-80 bg-white transform ${
+        className={`fixed top-0 left-0 z-50 h-full w-72 max-w-[80vw] bg-white transform ${
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -173,9 +192,11 @@ export default function Navbar() {
 
           <nav className="space-y-4 font-medium text-gray-800 relative">
             {/* REAL ESTATE (HOVER) */}
+
             <div className="relative group">
               <div className="flex items-center justify-between py-3 uppercase text-gray-800 group-hover:text-indigo-600 font-medium h-12">
                 <span>Real Estate</span>
+
                 <span className="transition-transform group-hover:rotate-180">
                   ▼
                 </span>
@@ -189,6 +210,7 @@ export default function Navbar() {
                 >
                   Buyers Leads
                 </Link>
+
                 <Link
                   to="/tenant_leads"
                   className="block px-6 py-3 text-gray-600 hover:text-indigo-600"
@@ -200,14 +222,17 @@ export default function Navbar() {
             </div>
 
             {/* STUDY ABROAD */}
+
             <Link to="/study_abroad" className="block py-3 uppercase">
               Study Abroad
             </Link>
 
             {/* EDUCATION (HOVER) */}
+
             <div className="relative group">
               <div className="flex items-center justify-between py-3 uppercase text-gray-800 group-hover:text-indigo-600 font-medium h-12">
                 <span>Education</span>
+
                 <span className="transition-transform group-hover:rotate-180">
                   ▼
                 </span>
@@ -221,6 +246,7 @@ export default function Navbar() {
                 >
                   Online MBA
                 </Link>
+
                 <Link
                   to="/certification"
                   className="block px-6 py-3 text-gray-600 hover:text-indigo-600"
@@ -228,6 +254,7 @@ export default function Navbar() {
                 >
                   Certification
                 </Link>
+
                 <Link
                   to="/phd_doctorate"
                   className="block px-6 py-3 text-gray-600 hover:text-indigo-600"
@@ -240,8 +267,11 @@ export default function Navbar() {
 
             {[
               ["/forex_trader", "Forex Market"],
+
               ["/about", "About"],
+
               ["/blogs", "Blog"],
+
               ["/contact", "Contact"],
             ].map(([path, label]) => (
               <Link
@@ -256,6 +286,7 @@ export default function Navbar() {
             ))}
 
             {/* MOBILE CTA */}
+
             <div className="pt-6 space-y-4 border-t">
               <Link
                 to="/login"
@@ -263,6 +294,7 @@ export default function Navbar() {
               >
                 Sign In
               </Link>
+
               <Link
                 to="/start_free_trial"
                 className="block text-center bg-indigo-600 text-white py-4 rounded-lg font-semibold"
@@ -270,6 +302,7 @@ export default function Navbar() {
                 Start Free Trial
               </Link>
             </div>
+
             <div className="text-center text-gray-500 text-sm">
               📞 +91 7415556568 <br />
               ✉️ info@optimizedleads.com

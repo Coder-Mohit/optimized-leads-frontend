@@ -7,7 +7,7 @@ export default function PricingSection({
   bg = "bg-slate-50",
 }) {
   return (
-    <section className="bg-slate-50 py-20 px-10">
+    <section className={`${bg} py-12`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <div className="mb-12 text-center">

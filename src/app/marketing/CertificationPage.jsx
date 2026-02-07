@@ -1,13 +1,13 @@
 import { BarChart3 } from "lucide-react";
-import CertificationHero from "../components/Education/CertificationHero";
-import ServicesSection from "../components/studyAbroad/ServicesSection";
-import HowItWorks from "../components/studyAbroad/HowItWorks";
-import PartnerSuccessStories from "../components/studyAbroad/PartnerSuccessStories";
+import CertificationHero from "../../components/Education/CertificationHero";
+import ServicesSection from "../../components/studyAbroad/ServicesSection";
+import HowItWorks from "../../components/studyAbroad/HowItWorks";
+import PartnerSuccessStories from "../../components/studyAbroad/PartnerSuccessStories";
 import { ShieldCheck } from "lucide-react";
 import { Zap } from "lucide-react";
 import { Target } from "lucide-react";
-import ContactForm from "../components/common/ContactForm";
-import WhyPartnerWithOptimizedLeads from "../components/studyAbroad/WhyPartnerWithOptimizedLeads";
+import ContactForm from "../../components/common/ContactForm";
+import WhyPartnerWithOptimizedLeads from "../../components/studyAbroad/WhyPartnerWithOptimizedLeads";
 
 /* ---------------- DATA ---------------- */
 

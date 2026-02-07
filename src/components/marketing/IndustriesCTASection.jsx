@@ -29,9 +29,10 @@ const industries = [
 
 export default function IndustriesCTASection() {
   return (
-    <section className="bg-slate-50 py-20 px-4">
-      <div className="mx-auto max-w-7xl">
-        <div className="rounded-3xl bg-white p-10 md:p-14 text-center shadow-xl">
+    <section className="bg-slate-50 py-8">
+      {/* CONTAINER */}
+      <div className="mx-auto max-w-7xl px-8">
+        <div className="rounded-3xl bg-white p-8 md:p-12 text-center shadow-xl">
           {/* TOP ICON */}
           <div className="mb-6 flex justify-center">
             <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 shadow-lg">

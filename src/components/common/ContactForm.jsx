@@ -63,7 +63,7 @@ export default function ContactForm({
   };
 
   return (
-    <section className="bg-gradient-to-b from-indigo-50 to-white py-16 sm:py-20">
+    <section className="bg-gradient-to-b from-indigo-50 to-white py-4 sm:py-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         <div className="bg-white rounded-3xl shadow-xl p-6 sm:p-10">
           <h2 className="text-2xl sm:text-3xl font-bold text-center mb-10">

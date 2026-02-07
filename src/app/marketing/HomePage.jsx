@@ -1,16 +1,17 @@
-import StepsSection from "../components/StepsSection";
-import Hero from "../components/Hero";
-import IndustriesSection from "../components/IndustriesSection";
-import IndustriesCTASection from "../components/IndustriesCTASection";
-import SuccessStories from "../components/SuccessStories";
-import FAQSection from "../components/FAQSection";
-import FinalCTASection from "../components/FinalCTASection";
+import StepsSection from "../../components/marketing/StepsSection";
+import Hero from "../../components/marketing/Hero";
+import IndustriesSection from "../../components/marketing/IndustriesSection";
+import IndustriesCTASection from "../../components/marketing/IndustriesCTASection";
+import SuccessStories from "../../components/marketing/SuccessStories";
+import FAQSection from "../../components/marketing/FAQSection";
+import HelpCard from "../../components/common/HelpCard";
+import FinalCTASection from "../../components/marketing/FinalCTASection";
 import { Star, Zap, Crown, Target, ShieldCheck, BarChart3 } from "lucide-react";
-import PricingSection from "../components/common/PricingSection";
-import ServicesSection from "../components/studyAbroad/ServicesSection";
-import HowItWorks from "../components/studyAbroad/HowItWorks";
-import PartnerSuccessStories from "../components/studyAbroad/PartnerSuccessStories";
-import WhyPartnerWithOptimizedLeads from "../components/studyAbroad/WhyPartnerWithOptimizedLeads";
+import PricingSection from "../../components/common/PricingSection";
+import ServicesSection from "../../components/studyAbroad/ServicesSection";
+import HowItWorks from "../../components/studyAbroad/HowItWorks";
+import PartnerSuccessStories from "../../components/studyAbroad/PartnerSuccessStories";
+import WhyPartnerWithOptimizedLeads from "../../components/studyAbroad/WhyPartnerWithOptimizedLeads";
 
 const homeServices = [
   {
@@ -271,6 +272,7 @@ export default function HomePage() {
       />
       <IndustriesCTASection />
       <FAQSection />
+      <HelpCard />
       <WhyPartnerWithOptimizedLeads features={homeFeatures} />
       <FinalCTASection />
     </div>

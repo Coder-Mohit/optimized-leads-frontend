@@ -6,25 +6,28 @@ const testimonials = [
     role: "Director, Elite Academic Advisors",
     avatar: "SC",
     rating: 5,
-    content: "OptimizedLeads has transformed our consultancy. The quality of doctoral candidates they provide is exceptional - we've seen a 40% increase in enrollment rates within just six months. Their verification process ensures we only speak with serious, qualified applicants.",
-    achievement: "40% Increase in Enrollments"
+    content:
+      "OptimizedLeads has transformed our consultancy. The quality of doctoral candidates they provide is exceptional - we've seen a 40% increase in enrollment rates within just six months. Their verification process ensures we only speak with serious, qualified applicants.",
+    achievement: "40% Increase in Enrollments",
   },
   {
     name: "Prof. Michael Rodriguez",
     role: "CEO, Graduate Pathways International",
     avatar: "MR",
     rating: 5,
-    content: "The lead generation system is sophisticated yet easy to use. We particularly appreciate the real-time analytics and dedicated support. Our team can now focus on what they do best - guiding students to their ideal doctoral programs.",
-    achievement: "250+ Successful Placements"
+    content:
+      "The lead generation system is sophisticated yet easy to use. We particularly appreciate the real-time analytics and dedicated support. Our team can now focus on what they do best - guiding students to their ideal doctoral programs.",
+    achievement: "250+ Successful Placements",
   },
   {
     name: "Dr. Emily Thompson",
     role: "Founder, Academic Bridge Consulting",
     avatar: "ET",
     rating: 5,
-    content: "As a growing consultancy, we needed a reliable source of high-quality leads. OptimizedLeads delivered beyond our expectations. The candidates are pre-screened, motivated, and genuinely interested in pursuing advanced degrees.",
-    achievement: "96% Lead Satisfaction Rate"
-  }
+    content:
+      "As a growing consultancy, we needed a reliable source of high-quality leads. OptimizedLeads delivered beyond our expectations. The candidates are pre-screened, motivated, and genuinely interested in pursuing advanced degrees.",
+    achievement: "96% Lead Satisfaction Rate",
+  },
 ];
 
 export default function PhDSuccessStories() {
@@ -41,7 +44,7 @@ export default function PhDSuccessStories() {
             Trusted by Leading Academic Consultancies
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Hear from our partners who have successfully grown their doctoral 
+            Hear from our partners who have successfully grown their doctoral
             recruitment programs with our premium lead generation services.
           </p>
         </div>
@@ -61,7 +64,10 @@ export default function PhDSuccessStories() {
               {/* Rating */}
               <div className="flex items-center gap-1 mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star
+                    key={i}
+                    className="w-5 h-5 fill-yellow-400 text-yellow-400"
+                  />
                 ))}
               </div>
 
@@ -93,28 +99,6 @@ export default function PhDSuccessStories() {
 
               {/* Hover Gradient */}
               <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-            </div>
-          ))}
-        </div>
-
-        {/* Bottom Stats */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
-          {[
-            { value: "500+", label: "Partner Consultancies" },
-            { value: "10,000+", label: "Doctoral Candidates" },
-            { value: "94%", label: "Success Rate" },
-            { value: "24/7", label: "Support Available" }
-          ].map((stat, index) => (
-            <div
-              key={index}
-              className="text-center bg-white rounded-xl p-6 shadow-md"
-            >
-              <div className="text-2xl font-bold text-gray-900 mb-1">
-                {stat.value}
-              </div>
-              <div className="text-sm text-gray-600">
-                {stat.label}
-              </div>
             </div>
           ))}
         </div>
