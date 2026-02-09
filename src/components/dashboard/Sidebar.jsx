@@ -69,7 +69,11 @@ export default function Sidebar({
           {!isCollapsed && (
             <div className="flex items-center gap-2 animate-fade-in">
               <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-600 rounded-xl flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform duration-300">
-                <span className="text-white font-bold text-sm">OL</span>
+                <img
+                  src="/logo.png"
+                  alt="Optimized Leads"
+                  className="w-6 h-6 object-contain filter brightness-0 invert"
+                />
               </div>
               <div className="transform transition-all duration-300">
                 <span className="font-bold text-white text-lg bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-transparent">

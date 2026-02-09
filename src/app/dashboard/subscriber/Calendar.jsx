@@ -180,175 +180,190 @@ export default function Calendar() {
   const selectedDateEvents = getEventsForDate(selectedDate);
 
   return (
-    <div className="p-8 bg-gradient-to-br from-gray-50 to-gray-100 min-h-full">
-      {/* Header Section */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-3">
-            <div className="p-3 bg-green-100 rounded-xl">
-              <CalendarIcon className="w-6 h-6 text-green-600" />
-            </div>
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">Calendar</h1>
-              <p className="text-gray-600">
-                Manage your schedule and appointments
-              </p>
-            </div>
-          </div>
-          <Button className="flex items-center gap-2 bg-green-600 hover:bg-green-700">
-            <Plus className="w-4 h-4" />
-            New Event
-          </Button>
-        </div>
+    <div className="p-6 min-h-full relative">
+      {/* Animated Background */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse animation-delay-4000"></div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Calendar */}
-        <div className="lg:col-span-2">
-          <Card className="shadow-lg border-0 bg-white">
-            <CardHeader className="pb-4">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-lg font-semibold text-gray-900">
-                  {monthNames[currentDate.getMonth()]}{" "}
-                  {currentDate.getFullYear()}
-                </CardTitle>
-                <div className="flex items-center gap-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => navigateMonth("prev")}
-                  >
-                    <ChevronLeft className="w-4 h-4" />
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => navigateMonth("next")}
-                  >
-                    <ChevronRight className="w-4 h-4" />
-                  </Button>
-                </div>
+      {/* Content */}
+      <div className="relative z-10">
+        {/* Header Section */}
+        <div className="mb-8">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-3">
+              <div className="p-3 bg-green-100 rounded-xl">
+                <CalendarIcon className="w-6 h-6 text-green-600" />
               </div>
-            </CardHeader>
-            <CardContent className="p-0">
-              {/* Day headers */}
-              <div className="grid grid-cols-7 border-b border-gray-200">
-                {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(
-                  (day) => (
-                    <div
-                      key={day}
-                      className="p-3 text-center text-sm font-medium text-gray-700"
-                    >
-                      {day}
-                    </div>
-                  ),
-                )}
+              <div>
+                <h1 className="text-3xl font-bold text-white mb-2 bg-gradient-to-r from-green-200 to-emerald-200 bg-clip-text text-transparent">
+                  Calendar
+                </h1>
+                <p className="text-white/70">
+                  Manage your schedule and appointments
+                </p>
               </div>
-              {/* Calendar days */}
-              <div className="grid grid-cols-7">{renderCalendar()}</div>
-            </CardContent>
-          </Card>
+            </div>
+            <button className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl hover:from-green-600 hover:to-emerald-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl group">
+              <Plus className="w-4 h-4 group-hover:rotate-90 transition-transform duration-300" />
+              <span className="hidden sm:inline">New Event</span>
+              <span className="sm:hidden">Add</span>
+            </button>
+          </div>
         </div>
 
-        {/* Events Sidebar */}
-        <div className="space-y-6">
-          {/* Selected Date Info */}
-          <Card className="shadow-lg border-0 bg-white">
-            <CardHeader className="pb-4">
-              <CardTitle className="text-lg font-semibold text-gray-900">
-                {selectedDate.toLocaleDateString("en-US", {
-                  weekday: "long",
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {selectedDateEvents.length > 0 ? (
-                  selectedDateEvents.map((event) => {
-                    const EventIcon = eventTypeConfig[event.type].icon;
-                    return (
-                      <div
-                        key={event.id}
-                        className="border-l-4 border-blue-500 pl-4"
-                      >
-                        <div className="flex items-center gap-2 mb-2">
-                          <EventIcon className="w-4 h-4 text-blue-600" />
-                          <span className="font-medium text-gray-900">
-                            {event.title}
-                          </span>
-                          <Badge className={eventTypeConfig[event.type].color}>
-                            {event.type}
-                          </Badge>
-                        </div>
-                        <p className="text-sm text-gray-600 mb-2">
-                          {event.description}
-                        </p>
-                        <div className="flex items-center gap-4 text-xs text-gray-500">
-                          <div className="flex items-center gap-1">
-                            <Clock className="w-3 h-3" />
-                            {event.time}
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <MapPin className="w-3 h-3" />
-                            {event.location}
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })
-                ) : (
-                  <div className="text-center py-8">
-                    <CalendarIcon className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                    <div className="text-gray-400 text-sm">
-                      No events scheduled
-                    </div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Calendar */}
+          <div className="lg:col-span-2">
+            <Card className="shadow-lg border-0 bg-white">
+              <CardHeader className="pb-4">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-lg font-semibold text-gray-900">
+                    {monthNames[currentDate.getMonth()]}{" "}
+                    {currentDate.getFullYear()}
+                  </CardTitle>
+                  <div className="flex items-center gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => navigateMonth("prev")}
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => navigateMonth("next")}
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </Button>
                   </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Upcoming Events */}
-          <Card className="shadow-lg border-0 bg-white">
-            <CardHeader className="pb-4">
-              <CardTitle className="text-lg font-semibold text-gray-900">
-                Upcoming Events
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                {mockEvents
-                  .filter((event) => new Date(event.date) >= new Date())
-                  .slice(0, 3)
-                  .map((event) => {
-                    const EventIcon = eventTypeConfig[event.type].icon;
-                    return (
+                </div>
+              </CardHeader>
+              <CardContent className="p-0">
+                {/* Day headers */}
+                <div className="grid grid-cols-7 border-b border-gray-200">
+                  {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(
+                    (day) => (
                       <div
-                        key={event.id}
-                        className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg"
+                        key={day}
+                        className="p-3 text-center text-sm font-medium text-gray-700"
                       >
-                        <div
-                          className={`p-2 rounded-lg ${eventTypeConfig[event.type].color}`}
-                        >
-                          <EventIcon className="w-4 h-4" />
-                        </div>
-                        <div className="flex-1">
-                          <div className="font-medium text-gray-900 text-sm">
-                            {event.title}
-                          </div>
-                          <div className="text-xs text-gray-500">
-                            {event.date} at {event.time}
-                          </div>
-                        </div>
+                        {day}
                       </div>
-                    );
+                    ),
+                  )}
+                </div>
+                {/* Calendar days */}
+                <div className="grid grid-cols-7">{renderCalendar()}</div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Events Sidebar */}
+          <div className="space-y-6">
+            {/* Selected Date Info */}
+            <Card className="shadow-lg border-0 bg-white">
+              <CardHeader className="pb-4">
+                <CardTitle className="text-lg font-semibold text-gray-900">
+                  {selectedDate.toLocaleDateString("en-US", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
                   })}
-              </div>
-            </CardContent>
-          </Card>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {selectedDateEvents.length > 0 ? (
+                    selectedDateEvents.map((event) => {
+                      const EventIcon = eventTypeConfig[event.type].icon;
+                      return (
+                        <div
+                          key={event.id}
+                          className="border-l-4 border-blue-500 pl-4"
+                        >
+                          <div className="flex items-center gap-2 mb-2">
+                            <EventIcon className="w-4 h-4 text-blue-600" />
+                            <span className="font-medium text-gray-900">
+                              {event.title}
+                            </span>
+                            <Badge
+                              className={eventTypeConfig[event.type].color}
+                            >
+                              {event.type}
+                            </Badge>
+                          </div>
+                          <p className="text-sm text-gray-600 mb-2">
+                            {event.description}
+                          </p>
+                          <div className="flex items-center gap-4 text-xs text-gray-500">
+                            <div className="flex items-center gap-1">
+                              <Clock className="w-3 h-3" />
+                              {event.time}
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <MapPin className="w-3 h-3" />
+                              {event.location}
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <div className="text-center py-8">
+                      <CalendarIcon className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                      <div className="text-gray-400 text-sm">
+                        No events scheduled
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Upcoming Events */}
+            <Card className="shadow-lg border-0 bg-white">
+              <CardHeader className="pb-4">
+                <CardTitle className="text-lg font-semibold text-gray-900">
+                  Upcoming Events
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  {mockEvents
+                    .filter((event) => new Date(event.date) >= new Date())
+                    .slice(0, 3)
+                    .map((event) => {
+                      const EventIcon = eventTypeConfig[event.type].icon;
+                      return (
+                        <div
+                          key={event.id}
+                          className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg"
+                        >
+                          <div
+                            className={`p-2 rounded-lg ${eventTypeConfig[event.type].color}`}
+                          >
+                            <EventIcon className="w-4 h-4" />
+                          </div>
+                          <div className="flex-1">
+                            <div className="font-medium text-gray-900 text-sm">
+                              {event.title}
+                            </div>
+                            <div className="text-xs text-gray-500">
+                              {event.date} at {event.time}
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
     </div>
