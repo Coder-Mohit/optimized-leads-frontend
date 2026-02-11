@@ -33,11 +33,11 @@ const ThemeLoader = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [textIndex, setTextIndex] = useState(0);
 
-  const loaderTexts = ["Welcome", "to", "Optimized Leads"];
+  const loaderTexts = ["Welcome", "to", "OptimizedLeads"];
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTextIndex((prev) => (prev + 1) % loaderTexts.length);
+      setTextIndex((prev) => (prev < loaderTexts.length - 1 ? prev + 1 : prev));
     }, 1000);
 
     // Auto-hide after 4 seconds
@@ -163,16 +163,28 @@ function AppContent() {
 }
 
 export default function App() {
-  const [showLoader, setShowLoader] = useState(true);
+  const [showLoader, setShowLoader] = useState(() => {
+    try {
+      return localStorage.getItem("optimizedleads_loader_seen") !== "1";
+    } catch {
+      return true;
+    }
+  });
 
   useEffect(() => {
-    // Show loader immediately on mount
+    if (!showLoader) return;
+
     const timer = setTimeout(() => {
       setShowLoader(false);
+      try {
+        localStorage.setItem("optimizedleads_loader_seen", "1");
+      } catch {
+        // ignore
+      }
     }, 4000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [showLoader]);
 
   return (
     <div className="relative">
