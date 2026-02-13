@@ -66,9 +66,18 @@ const mockEvents = [
 ];
 
 const eventTypeConfig = {
-  Meeting: { color: "bg-blue-100 text-blue-700", icon: Users },
-  Presentation: { color: "bg-purple-100 text-purple-700", icon: CalendarIcon },
-  Training: { color: "bg-green-100 text-green-700", icon: Clock },
+  Meeting: {
+    color: "bg-blue-500/20 text-blue-300 border border-blue-400/30",
+    icon: Users,
+  },
+  Presentation: {
+    color: "bg-purple-500/20 text-purple-300 border border-purple-400/30",
+    icon: CalendarIcon,
+  },
+  Training: {
+    color: "bg-green-500/20 text-green-300 border border-green-400/30",
+    icon: Clock,
+  },
 };
 
 export default function Calendar() {
@@ -100,7 +109,10 @@ export default function Calendar() {
     // Add empty cells for days before month starts
     for (let i = 0; i < firstDay; i++) {
       days.push(
-        <div key={`empty-${i}`} className="h-24 border border-gray-100"></div>,
+        <div
+          key={`empty-${i}`}
+          className="h-16 sm:h-20 md:h-24 border border-white/10"
+        ></div>,
       );
     }
 
@@ -118,14 +130,16 @@ export default function Calendar() {
       days.push(
         <div
           key={day}
-          className={`h-24 border border-gray-100 p-2 cursor-pointer transition-colors ${
-            isSelected ? "bg-blue-50 border-blue-300" : "hover:bg-gray-50"
-          } ${isToday ? "bg-yellow-50" : ""}`}
+          className={`h-16 sm:h-20 md:h-24 border border-white/10 p-1 sm:p-2 cursor-pointer transition-colors ${
+            isSelected
+              ? "bg-blue-500/20 border-blue-400/30"
+              : "hover:bg-white/5"
+          } ${isToday ? "bg-yellow-500/20" : ""}`}
           onClick={() => setSelectedDate(date)}
         >
           <div
             className={`text-sm font-medium mb-1 ${
-              isToday ? "text-blue-600" : "text-gray-900"
+              isToday ? "text-blue-300" : "text-white"
             }`}
           >
             {day}
@@ -140,7 +154,7 @@ export default function Calendar() {
               </div>
             ))}
             {events.length > 2 && (
-              <div className="text-xs text-gray-500">
+              <div className="text-xs text-white/60">
                 +{events.length - 2} more
               </div>
             )}
@@ -180,7 +194,7 @@ export default function Calendar() {
   const selectedDateEvents = getEventsForDate(selectedDate);
 
   return (
-    <div className="p-6 min-h-full relative">
+    <div className="p-4 sm:p-6 min-h-full relative">
       {/* Animated Background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
@@ -191,22 +205,22 @@ export default function Calendar() {
       {/* Content */}
       <div className="relative z-10">
         {/* Header Section */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between mb-6">
+        <div className="mb-6 sm:mb-8">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between lg:gap-6 mb-4 lg:mb-6">
             <div className="flex items-center gap-3">
-              <div className="p-3 bg-green-100 rounded-xl">
-                <CalendarIcon className="w-6 h-6 text-green-600" />
+              <div className="p-3 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20">
+                <CalendarIcon className="w-6 h-6 text-green-300" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-white mb-2 bg-gradient-to-r from-green-200 to-emerald-200 bg-clip-text text-transparent">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-2 bg-gradient-to-r from-green-200 to-emerald-200 bg-clip-text text-transparent">
                   Calendar
                 </h1>
-                <p className="text-white/70">
+                <p className="text-white/70 text-sm sm:text-base">
                   Manage your schedule and appointments
                 </p>
               </div>
             </div>
-            <button className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl hover:from-green-600 hover:to-emerald-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl group">
+            <button className="flex items-center justify-center gap-2 px-4 py-2 sm:px-6 sm:py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl hover:from-green-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl group w-full lg:w-auto">
               <Plus className="w-4 h-4 group-hover:rotate-90 transition-transform duration-300" />
               <span className="hidden sm:inline">New Event</span>
               <span className="sm:hidden">Add</span>
@@ -214,13 +228,13 @@ export default function Calendar() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           {/* Calendar */}
           <div className="lg:col-span-2">
-            <Card className="shadow-lg border-0 bg-white">
+            <Card className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-300">
               <CardHeader className="pb-4">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-lg font-semibold text-gray-900">
+                  <CardTitle className="text-lg font-semibold text-white">
                     {monthNames[currentDate.getMonth()]}{" "}
                     {currentDate.getFullYear()}
                   </CardTitle>
@@ -229,6 +243,7 @@ export default function Calendar() {
                       variant="outline"
                       size="sm"
                       onClick={() => navigateMonth("prev")}
+                      className="border-white/20 text-white hover:bg-white/20"
                     >
                       <ChevronLeft className="w-4 h-4" />
                     </Button>
@@ -236,6 +251,7 @@ export default function Calendar() {
                       variant="outline"
                       size="sm"
                       onClick={() => navigateMonth("next")}
+                      className="border-white/20 text-white hover:bg-white/20"
                     >
                       <ChevronRight className="w-4 h-4" />
                     </Button>
@@ -244,12 +260,12 @@ export default function Calendar() {
               </CardHeader>
               <CardContent className="p-0">
                 {/* Day headers */}
-                <div className="grid grid-cols-7 border-b border-gray-200">
+                <div className="grid grid-cols-7 border-b border-white/20">
                   {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(
                     (day) => (
                       <div
                         key={day}
-                        className="p-3 text-center text-sm font-medium text-gray-700"
+                        className="p-3 text-center text-sm font-medium text-white/80"
                       >
                         {day}
                       </div>
@@ -265,9 +281,9 @@ export default function Calendar() {
           {/* Events Sidebar */}
           <div className="space-y-6">
             {/* Selected Date Info */}
-            <Card className="shadow-lg border-0 bg-white">
+            <Card className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-300">
               <CardHeader className="pb-4">
-                <CardTitle className="text-lg font-semibold text-gray-900">
+                <CardTitle className="text-lg font-semibold text-white">
                   {selectedDate.toLocaleDateString("en-US", {
                     weekday: "long",
                     year: "numeric",
@@ -284,11 +300,11 @@ export default function Calendar() {
                       return (
                         <div
                           key={event.id}
-                          className="border-l-4 border-blue-500 pl-4"
+                          className="border-l-4 border-blue-400/70 pl-4"
                         >
                           <div className="flex items-center gap-2 mb-2">
-                            <EventIcon className="w-4 h-4 text-blue-600" />
-                            <span className="font-medium text-gray-900">
+                            <EventIcon className="w-4 h-4 text-blue-300" />
+                            <span className="font-medium text-white">
                               {event.title}
                             </span>
                             <Badge
@@ -297,10 +313,10 @@ export default function Calendar() {
                               {event.type}
                             </Badge>
                           </div>
-                          <p className="text-sm text-gray-600 mb-2">
+                          <p className="text-sm text-white/70 mb-2">
                             {event.description}
                           </p>
-                          <div className="flex items-center gap-4 text-xs text-gray-500">
+                          <div className="flex items-center gap-4 text-xs text-white/60">
                             <div className="flex items-center gap-1">
                               <Clock className="w-3 h-3" />
                               {event.time}
@@ -315,8 +331,8 @@ export default function Calendar() {
                     })
                   ) : (
                     <div className="text-center py-8">
-                      <CalendarIcon className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                      <div className="text-gray-400 text-sm">
+                      <CalendarIcon className="w-12 h-12 text-white/40 mx-auto mb-4" />
+                      <div className="text-white/60 text-sm">
                         No events scheduled
                       </div>
                     </div>
@@ -326,9 +342,9 @@ export default function Calendar() {
             </Card>
 
             {/* Upcoming Events */}
-            <Card className="shadow-lg border-0 bg-white">
+            <Card className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-300">
               <CardHeader className="pb-4">
-                <CardTitle className="text-lg font-semibold text-gray-900">
+                <CardTitle className="text-lg font-semibold text-white">
                   Upcoming Events
                 </CardTitle>
               </CardHeader>
@@ -342,7 +358,7 @@ export default function Calendar() {
                       return (
                         <div
                           key={event.id}
-                          className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg"
+                          className="flex items-center gap-3 p-3 bg-white/5 rounded-lg"
                         >
                           <div
                             className={`p-2 rounded-lg ${eventTypeConfig[event.type].color}`}
@@ -350,10 +366,10 @@ export default function Calendar() {
                             <EventIcon className="w-4 h-4" />
                           </div>
                           <div className="flex-1">
-                            <div className="font-medium text-gray-900 text-sm">
+                            <div className="font-medium text-white text-sm">
                               {event.title}
                             </div>
-                            <div className="text-xs text-gray-500">
+                            <div className="text-xs text-white/60">
                               {event.date} at {event.time}
                             </div>
                           </div>

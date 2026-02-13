@@ -40,7 +40,7 @@ export default function Analytics() {
   const totalLeads = analyticsData.reduce((sum, item) => sum + item.leads, 0);
 
   return (
-    <div className="p-6 min-h-full relative">
+    <div className="p-4 sm:p-6 min-h-full">
       {/* Animated Background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
@@ -51,213 +51,161 @@ export default function Analytics() {
       {/* Content */}
       <div className="relative z-10">
         {/* Header Section */}
-        <div className="mb-8">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-6">
+        <div className="mb-6 sm:mb-8 animate-fade-in">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between lg:gap-6 mb-4 lg:mb-6">
             <div className="flex items-center gap-3">
-              <div className="p-3 bg-blue-100 rounded-xl">
-                <BarChart3 className="w-6 h-6 text-blue-600" />
+              <div className="p-3 bg-gradient-to-br from-blue-400/20 to-cyan-600/20 backdrop-blur-sm rounded-xl border border-white/20 transition-all duration-300">
+                <BarChart3 className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-white mb-2 bg-gradient-to-r from-blue-200 to-cyan-200 bg-clip-text text-transparent">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-2 bg-gradient-to-r from-blue-200 to-cyan-200 bg-clip-text text-transparent">
                   Analytics
                 </h1>
-                <p className="text-white/70">
+                <p className="text-white/70 text-sm sm:text-base">
                   Detailed insights and performance metrics
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <button className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-cyan-600 text-white rounded-xl hover:from-blue-600 hover:to-cyan-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl group">
-                <Plus className="w-4 h-4 group-hover:rotate-90 transition-transform duration-300" />
-                <span className="hidden sm:inline">Add Report</span>
-                <span className="sm:hidden">Add</span>
+
+            <div className="flex items-center gap-2 sm:gap-3">
+              <button className="flex items-center gap-2 px-4 py-2 sm:px-6 sm:py-3 bg-gradient-to-r from-blue-500 to-cyan-600 text-white rounded-xl hover:from-blue-600 hover:to-cyan-700 transition-all duration-300 shadow-lg hover:shadow-xl group">
+                <Plus className="w-3 h-3 sm:w-4 sm:h-4 group-hover:rotate-90 transition-transform duration-300" />
+                <span className="hidden xs:inline sm:inline">Add Report</span>
+                <span className="xs:inline sm:hidden">Add</span>
               </button>
-              <button className="flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white rounded-xl hover:bg-white/20 transition-all duration-300 transform hover:scale-105 group">
-                <Download className="w-4 h-4 group-hover:translate-y-1 transition-transform duration-300" />
-                <span className="hidden sm:inline">Export</span>
-                <span className="sm:hidden">Exp</span>
+              <button className="flex items-center gap-2 px-4 py-2 sm:px-6 sm:py-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white rounded-xl hover:bg-white/20 transition-all duration-300 group">
+                <Download className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-y-1 transition-transform duration-300" />
+                <span className="hidden xs:inline sm:inline">Export</span>
+                <span className="xs:inline sm:hidden">Exp</span>
               </button>
             </div>
           </div>
         </div>
 
         {/* Key Metrics */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <Card className="shadow-lg border-0 bg-white hover:shadow-xl transition-shadow">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="p-2 bg-green-100 rounded-lg">
-                  <TrendingUp className="w-5 h-5 text-green-600" />
-                </div>
-                <span className="text-sm font-medium text-green-600">
-                  +18.5%
-                </span>
-              </div>
-              <div className="text-2xl font-bold text-gray-900 mb-1">
-                ₹{totalRevenue.toLocaleString()}
-              </div>
-              <div className="text-sm text-gray-600">Total Revenue</div>
-            </CardContent>
-          </Card>
-
-          <Card className="shadow-lg border-0 bg-white hover:shadow-xl transition-shadow">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="p-2 bg-blue-100 rounded-lg">
-                  <Target className="w-5 h-5 text-blue-600" />
-                </div>
-                <span className="text-sm font-medium text-blue-600">+5.2%</span>
-              </div>
-              <div className="text-2xl font-bold text-gray-900 mb-1">
-                {avgConversionRate}%
-              </div>
-              <div className="text-sm text-gray-600">Avg Conversion Rate</div>
-            </CardContent>
-          </Card>
-
-          <Card className="shadow-lg border-0 bg-white hover:shadow-xl transition-shadow">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="p-2 bg-purple-100 rounded-lg">
-                  <Activity className="w-5 h-5 text-purple-600" />
-                </div>
-                <span className="text-sm font-medium text-purple-600">
-                  +12.3%
-                </span>
-              </div>
-              <div className="text-2xl font-bold text-gray-900 mb-1">
-                {totalLeads}
-              </div>
-              <div className="text-sm text-gray-600">Total Leads</div>
-            </CardContent>
-          </Card>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
+          <MetricCard
+            title="Total Revenue"
+            value={`₹${totalRevenue.toLocaleString()}`}
+            icon={<TrendingUp className="w-5 h-5 text-green-300" />}
+          />
+          <MetricCard
+            title="Avg Conversion"
+            value={`${avgConversionRate}%`}
+            icon={<Target className="w-5 h-5 text-blue-300" />}
+          />
+          <MetricCard
+            title="Total Leads"
+            value={totalLeads}
+            icon={<PieChart className="w-5 h-5 text-purple-300" />}
+          />
         </div>
 
         {/* Charts Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          {/* Revenue Chart */}
-          <Card className="shadow-lg border-0 bg-white">
-            <CardHeader className="pb-4">
-              <CardTitle className="flex items-center gap-2 text-lg font-semibold text-gray-900">
-                <TrendingUp className="w-5 h-5 text-green-600" />
-                Revenue Trend
-              </CardTitle>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-6 sm:mb-8">
+          {/* Revenue bars */}
+          <Card className="bg-white/10 backdrop-blur-xl border border-white/20">
+            <CardHeader>
+              <CardTitle className="text-white">Revenue Trend</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="h-64 flex items-end justify-between gap-3">
-                {analyticsData.map((data, index) => (
+              <div className="flex gap-2 items-end h-48 overflow-x-auto">
+                {analyticsData.map((d, i) => (
                   <div
-                    key={index}
-                    className="flex-1 flex flex-col items-center gap-2"
+                    key={i}
+                    className="flex flex-col items-center gap-1 min-w-[28px]"
                   >
                     <div
-                      className="w-full bg-gradient-to-t from-green-500 to-green-400 rounded-sm transition-all duration-500 hover:from-green-600 hover:to-green-500"
-                      style={{
-                        height: `${(data.revenue / 205000) * 100}%`,
-                        minHeight: "8px",
-                      }}
+                      className="w-full bg-green-500/80 rounded-sm"
+                      style={{ height: `${(d.revenue / 205000) * 100}%` }}
                     />
-                    <span className="text-xs text-gray-600 font-medium">
-                      {data.month}
-                    </span>
+                    <span className="text-xs text-white/70">{d.month}</span>
                   </div>
                 ))}
               </div>
             </CardContent>
           </Card>
 
-          {/* Source Distribution */}
-          <Card className="shadow-lg border-0 bg-white">
-            <CardHeader className="pb-4">
-              <CardTitle className="flex items-center gap-2 text-lg font-semibold text-gray-900">
-                <PieChart className="w-5 h-5 text-blue-600" />
-                Lead Sources
-              </CardTitle>
+          {/* Sources */}
+          <Card className="bg-white/10 backdrop-blur-xl border border-white/20">
+            <CardHeader>
+              <CardTitle className="text-white">Lead Sources</CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {sourceData.map((source, index) => (
-                  <div key={index} className="flex items-center gap-3">
-                    <div className={`w-4 h-4 ${source.color} rounded`} />
-                    <div className="flex-1">
-                      <div className="text-sm font-medium text-gray-900">
-                        {source.source}
-                      </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2">
-                        <div
-                          className={`${source.color} h-2 rounded-full transition-all duration-500`}
-                          style={{ width: `${source.value * 2}%` }}
-                        />
-                      </div>
-                    </div>
-                    <div className="text-sm font-semibold text-gray-900">
-                      {source.value}%
+            <CardContent className="space-y-4">
+              {sourceData.map((s, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  <div className={`w-4 h-4 rounded ${s.color}`} />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm text-white truncate">{s.source}</p>
+                    <div className="h-2 bg-white/20 rounded-full">
+                      <div
+                        className={`${s.color} h-2 rounded-full`}
+                        style={{ width: `${s.value * 2}%` }}
+                      />
                     </div>
                   </div>
-                ))}
-              </div>
+                  <span className="text-white text-sm">{s.value}%</span>
+                </div>
+              ))}
             </CardContent>
           </Card>
         </div>
 
-        {/* Performance Table */}
-        <Card className="shadow-lg border-0 bg-white">
-          <CardHeader className="pb-4">
-            <CardTitle className="text-lg font-semibold text-gray-900">
-              Monthly Performance
-            </CardTitle>
+        {/* Table */}
+        <Card className="bg-white/10 backdrop-blur-xl border border-white/20">
+          <CardHeader>
+            <CardTitle className="text-white">Monthly Performance</CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-gray-200">
-                    <th className="text-left py-3 px-4 font-medium text-gray-700">
-                      Month
-                    </th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-700">
-                      Leads
-                    </th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-700">
-                      Converted
-                    </th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-700">
-                      Revenue
-                    </th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-700">
-                      Rate
-                    </th>
+          <CardContent className="overflow-x-auto">
+            <table className="min-w-[520px] w-full text-sm">
+              <thead>
+                <tr className="border-b border-white/20">
+                  <th className="px-4 py-3 text-left text-white/80">Month</th>
+                  <th className="px-4 py-3 text-left text-white/80">Leads</th>
+                  <th className="px-4 py-3 text-left text-white/80">
+                    Converted
+                  </th>
+                  <th className="px-4 py-3 text-left text-white/80">Revenue</th>
+                  <th className="px-4 py-3 text-left text-white/80">Rate</th>
+                </tr>
+              </thead>
+              <tbody>
+                {analyticsData.map((d, i) => (
+                  <tr
+                    key={i}
+                    className="border-b border-white/10 hover:bg-white/5"
+                  >
+                    <td className="px-4 py-3 text-white">{d.month}</td>
+                    <td className="px-4 py-3 text-white/80">{d.leads}</td>
+                    <td className="px-4 py-3 text-white/80">{d.converted}</td>
+                    <td className="px-4 py-3 text-white/80">
+                      ₹{d.revenue.toLocaleString()}
+                    </td>
+                    <td className="px-4 py-3 text-green-300">
+                      {((d.converted / d.leads) * 100).toFixed(1)}%
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {analyticsData.map((data, index) => (
-                    <tr
-                      key={index}
-                      className="border-b border-gray-100 hover:bg-gray-50"
-                    >
-                      <td className="py-3 px-4 text-gray-900 font-medium">
-                        {data.month}
-                      </td>
-                      <td className="py-3 px-4 text-gray-700">{data.leads}</td>
-                      <td className="py-3 px-4 text-gray-700">
-                        {data.converted}
-                      </td>
-                      <td className="py-3 px-4 text-gray-700 font-medium">
-                        ₹{data.revenue.toLocaleString()}
-                      </td>
-                      <td className="py-3 px-4">
-                        <span className="text-green-600 font-medium">
-                          {((data.converted / data.leads) * 100).toFixed(1)}%
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                ))}
+              </tbody>
+            </table>
           </CardContent>
         </Card>
       </div>
     </div>
+  );
+}
+
+/* Helper */
+function MetricCard({ title, value, icon }) {
+  return (
+    <Card className="bg-white/10 backdrop-blur-xl border border-white/20">
+      <CardContent className="p-4">
+        <div className="flex items-center justify-between mb-3">
+          <div className="p-2 bg-white/10 rounded-lg">{icon}</div>
+        </div>
+        <div className="text-xl font-bold text-white">{value}</div>
+        <div className="text-sm text-white/60">{title}</div>
+      </CardContent>
+    </Card>
   );
 }

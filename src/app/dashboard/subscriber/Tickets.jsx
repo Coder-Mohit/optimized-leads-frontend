@@ -76,15 +76,24 @@ const mockTickets = [
 ];
 
 const statusConfig = {
-  Open: { icon: AlertCircle, color: "bg-red-100 text-red-700" },
-  "In Progress": { icon: Clock, color: "bg-yellow-100 text-yellow-700" },
-  Resolved: { icon: CheckCircle, color: "bg-green-100 text-green-700" },
+  Open: {
+    icon: AlertCircle,
+    color: "bg-red-500/20 text-red-300 border border-red-400/30",
+  },
+  "In Progress": {
+    icon: Clock,
+    color: "bg-yellow-500/20 text-yellow-300 border border-yellow-400/30",
+  },
+  Resolved: {
+    icon: CheckCircle,
+    color: "bg-green-500/20 text-green-300 border border-green-400/30",
+  },
 };
 
 const priorityConfig = {
-  High: "bg-red-100 text-red-700",
-  Medium: "bg-yellow-100 text-yellow-700",
-  Low: "bg-green-100 text-green-700",
+  High: "bg-red-500/20 text-red-300 border border-red-400/30",
+  Medium: "bg-yellow-500/20 text-yellow-300 border border-yellow-400/30",
+  Low: "bg-green-500/20 text-green-300 border border-green-400/30",
 };
 
 export default function Tickets() {
@@ -103,7 +112,7 @@ export default function Tickets() {
   const statusTabs = ["All", "Open", "In Progress", "Resolved"];
 
   return (
-    <div className="p-6 min-h-full relative">
+    <div className="w-full max-w-full p-4 sm:p-6 min-h-full relative overflow-x-hidden">
       {/* Animated Background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
@@ -114,22 +123,22 @@ export default function Tickets() {
       {/* Content */}
       <div className="relative z-10">
         {/* Header Section */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between mb-6">
+        <div className="mb-6 sm:mb-8">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
             <div className="flex items-center gap-3">
-              <div className="p-3 bg-purple-100 rounded-xl">
-                <HelpCircle className="w-6 h-6 text-purple-600" />
+              <div className="p-2 sm:p-3 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20">
+                <HelpCircle className="w-4 h-4 sm:w-6 sm:h-6 text-purple-300" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-white mb-2 bg-gradient-to-r from-purple-200 to-pink-200 bg-clip-text text-transparent">
+                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-1 sm:mb-2 bg-gradient-to-r from-purple-200 to-pink-200 bg-clip-text text-transparent">
                   Support Tickets
                 </h1>
-                <p className="text-white/70">
+                <p className="text-white/70 text-sm sm:text-base">
                   Manage and track customer support requests
                 </p>
               </div>
             </div>
-            <button className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-xl hover:from-purple-600 hover:to-pink-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl group">
+            <button className="flex items-center justify-center gap-2 px-4 sm:px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-xl hover:from-purple-600 hover:to-pink-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl group w-full sm:w-auto md:w-auto">
               <Plus className="w-4 h-4 group-hover:rotate-90 transition-transform duration-300" />
               <span className="hidden sm:inline">New Ticket</span>
               <span className="sm:hidden">Add</span>
@@ -137,74 +146,79 @@ export default function Tickets() {
           </div>
 
           {/* Stats Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <Card className="shadow-md border-0 bg-white">
-              <CardContent className="p-4">
-                <div className="text-2xl font-bold text-gray-900">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            <Card className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl transition-all duration-300">
+              <CardContent className="p-3 sm:p-4">
+                <div className="text-2xl font-bold text-white">
                   {mockTickets.length}
                 </div>
-                <div className="text-sm text-gray-600">Total Tickets</div>
+                <div className="text-sm text-white/70">Total Tickets</div>
               </CardContent>
             </Card>
-            <Card className="shadow-md border-0 bg-white">
-              <CardContent className="p-4">
-                <div className="text-2xl font-bold text-red-600">
+            <Card className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl transition-all duration-300">
+              <CardContent className="p-3 sm:p-4">
+                <div className="text-2xl font-bold text-red-300">
                   {mockTickets.filter((t) => t.status === "Open").length}
                 </div>
-                <div className="text-sm text-gray-600">Open</div>
+                <div className="text-sm text-white/70">Open</div>
               </CardContent>
             </Card>
-            <Card className="shadow-md border-0 bg-white">
-              <CardContent className="p-4">
-                <div className="text-2xl font-bold text-yellow-600">
+            <Card className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-300">
+              <CardContent className="p-3 sm:p-4">
+                <div className="text-2xl font-bold text-yellow-300">
                   {mockTickets.filter((t) => t.status === "In Progress").length}
                 </div>
-                <div className="text-sm text-gray-600">In Progress</div>
+                <div className="text-sm text-white/70">In Progress</div>
               </CardContent>
             </Card>
-            <Card className="shadow-md border-0 bg-white">
-              <CardContent className="p-4">
-                <div className="text-2xl font-bold text-green-600">
+            <Card className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-300">
+              <CardContent className="p-3 sm:p-4">
+                <div className="text-2xl font-bold text-green-300">
                   {mockTickets.filter((t) => t.status === "Resolved").length}
                 </div>
-                <div className="text-sm text-gray-600">Resolved</div>
+                <div className="text-sm text-white/70">Resolved</div>
               </CardContent>
             </Card>
           </div>
         </div>
 
         {/* Filters and Search */}
-        <Card className="shadow-lg border-0 bg-white mb-6">
-          <CardContent className="p-6">
-            <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
+        <Card className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-300 mb-4 sm:mb-6">
+          <CardContent className="p-3 sm:p-4">
+            <div className="flex flex-col gap-4">
               <div className="flex flex-wrap gap-2">
                 {statusTabs.map((tab) => (
                   <button
                     key={tab}
                     onClick={() => setStatusFilter(tab)}
-                    className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                    className={`px-3 py-2 rounded-lg font-medium transition-all text-sm ${
                       statusFilter === tab
-                        ? "bg-purple-600 text-white"
-                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                        ? "bg-purple-500/20 text-purple-300 border border-purple-400/30"
+                        : "bg-white/10 text-white/70 hover:bg-white/20 border border-white/20"
                     }`}
                   >
                     {tab}
                   </button>
                 ))}
               </div>
-              <div className="flex items-center gap-3">
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="relative flex-1 sm:flex-initial">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/60 w-4 h-4" />
                   <Input
                     placeholder="Search tickets..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10 w-64"
+                    className="pl-10 w-full sm:w-64 bg-white/10 border-white/20 text-white placeholder-white/60 focus:border-white/40 focus:ring-white/20 backdrop-blur-sm transition-all duration-300"
                   />
                 </div>
-                <Button variant="outline" size="sm">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="border-white/20 text-white hover:bg-white/20"
+                >
                   <Filter className="w-4 h-4 mr-2" />
-                  Filters
+                  <span className="hidden sm:inline">Filter</span>
+                  <span className="sm:hidden">F</span>
                 </Button>
               </div>
             </div>
@@ -218,18 +232,18 @@ export default function Tickets() {
             return (
               <Card
                 key={ticket.id}
-                className="shadow-lg border-0 bg-white hover:shadow-xl transition-shadow"
+                className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-300"
               >
                 <CardContent className="p-6">
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex flex-wrap items-center gap-3 mb-2">
                         <div
                           className={`p-2 rounded-lg ${statusConfig[ticket.status].color}`}
                         >
                           <StatusIcon className="w-4 h-4" />
                         </div>
-                        <h3 className="text-lg font-semibold text-gray-900">
+                        <h3 className="text-lg font-semibold text-white min-w-0 break-words">
                           {ticket.title}
                         </h3>
                         <Badge className={priorityConfig[ticket.priority]}>
@@ -237,13 +251,13 @@ export default function Tickets() {
                         </Badge>
                         <Badge
                           variant="outline"
-                          className="border-gray-200 text-gray-700"
+                          className="border-white/20 text-white/80 bg-white/5"
                         >
                           {ticket.category}
                         </Badge>
                       </div>
-                      <p className="text-gray-600 mb-3">{ticket.description}</p>
-                      <div className="flex items-center gap-4 text-sm text-gray-500">
+                      <p className="text-white/70 mb-3">{ticket.description}</p>
+                      <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-sm text-white/60">
                         <span>#{ticket.id.toString().padStart(4, "0")}</span>
                         <span>Created by {ticket.createdBy}</span>
                         <span>Assigned to {ticket.assignedTo}</span>
@@ -254,8 +268,12 @@ export default function Tickets() {
                         </div>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2 ml-4">
-                      <Button variant="outline" size="sm">
+                    <div className="flex items-center gap-2 sm:ml-4">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="border-white/20 text-white hover:bg-white/20"
+                      >
                         View Details
                       </Button>
                     </div>
@@ -268,10 +286,10 @@ export default function Tickets() {
 
         {/* Empty State */}
         {filteredTickets.length === 0 && (
-          <Card className="shadow-lg border-0 bg-white">
+          <Card className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-300">
             <CardContent className="p-12 text-center">
-              <HelpCircle className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-              <div className="text-gray-400 text-sm">
+              <HelpCircle className="w-12 h-12 text-white/40 mx-auto mb-4" />
+              <div className="text-white/60 text-sm">
                 No tickets found matching your criteria
               </div>
             </CardContent>

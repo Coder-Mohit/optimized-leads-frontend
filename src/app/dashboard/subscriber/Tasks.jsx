@@ -24,7 +24,7 @@ export default function Tasks() {
   const [viewMode, setViewMode] = useState("board"); // 'board' or 'list'
 
   return (
-    <div className="p-6 min-h-full relative">
+    <div className="p-4 sm:p-6 min-h-full relative">
       {/* Animated Background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
@@ -35,23 +35,23 @@ export default function Tasks() {
       {/* Content */}
       <div className="relative z-10">
         {/* Header Section */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between mb-6">
+        <div className="mb-6 sm:mb-8">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between lg:gap-6 mb-4 lg:mb-6">
             <div className="flex items-center gap-3">
-              <div className="p-3 bg-orange-100 rounded-xl">
-                <BarChart3 className="w-6 h-6 text-orange-600" />
+              <div className="p-3 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20">
+                <BarChart3 className="w-6 h-6 text-orange-300" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-white mb-2 bg-gradient-to-r from-orange-200 to-red-200 bg-clip-text text-transparent">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-2 bg-gradient-to-r from-orange-200 to-red-200 bg-clip-text text-transparent">
                   Tasks
                 </h1>
-                <p className="text-white/70">
+                <p className="text-white/70 text-sm sm:text-base">
                   Manage your tasks and track progress
                 </p>
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <button className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-500 to-red-600 text-white rounded-xl hover:from-orange-600 hover:to-red-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl group">
+              <button className="flex items-center justify-center gap-2 px-4 py-2 sm:px-6 sm:py-3 bg-gradient-to-r from-orange-500 to-red-600 text-white rounded-xl hover:from-orange-600 hover:to-red-700 transition-all duration-300 shadow-lg hover:shadow-xl group w-full lg:w-auto">
                 <Plus className="w-4 h-4 group-hover:rotate-90 transition-transform duration-300" />
                 <span className="hidden sm:inline">New Task</span>
                 <span className="sm:hidden">Add</span>
@@ -60,45 +60,45 @@ export default function Tasks() {
           </div>
 
           {/* Stats Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <Card className="shadow-md border-0 bg-white">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+            <Card className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-300">
               <CardContent className="p-4">
-                <div className="text-2xl font-bold text-gray-900">
+                <div className="text-2xl font-bold text-white">
                   {taskStats.total}
                 </div>
-                <div className="text-sm text-gray-600">Total Tasks</div>
+                <div className="text-sm text-white/70">Total Tasks</div>
               </CardContent>
             </Card>
-            <Card className="shadow-md border-0 bg-white">
+            <Card className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-300">
               <CardContent className="p-4">
-                <div className="text-2xl font-bold text-red-600">
+                <div className="text-2xl font-bold text-red-300">
                   {taskStats.todo}
                 </div>
-                <div className="text-sm text-gray-600">To Do</div>
+                <div className="text-sm text-white/70">To Do</div>
               </CardContent>
             </Card>
-            <Card className="shadow-md border-0 bg-white">
+            <Card className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-300">
               <CardContent className="p-4">
-                <div className="text-2xl font-bold text-yellow-600">
+                <div className="text-2xl font-bold text-yellow-300">
                   {taskStats.inProgress}
                 </div>
-                <div className="text-sm text-gray-600">In Progress</div>
+                <div className="text-sm text-white/70">In Progress</div>
               </CardContent>
             </Card>
-            <Card className="shadow-md border-0 bg-white">
+            <Card className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-300">
               <CardContent className="p-4">
-                <div className="text-2xl font-bold text-green-600">
+                <div className="text-2xl font-bold text-green-300">
                   {taskStats.completed}
                 </div>
-                <div className="text-sm text-gray-600">Completed</div>
+                <div className="text-sm text-white/70">Completed</div>
               </CardContent>
             </Card>
           </div>
         </div>
 
         {/* View Toggle and Filters */}
-        <Card className="shadow-lg border-0 bg-white mb-6">
-          <CardContent className="p-6">
+        <Card className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-300 mb-6">
+          <CardContent className="p-4 sm:p-6">
             <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
               <div className="flex items-center gap-2">
                 <Button
@@ -129,17 +129,21 @@ export default function Tasks() {
                   List View
                 </Button>
               </div>
-              <div className="flex items-center gap-3">
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <div className="flex items-center gap-3 w-full lg:w-auto">
+                <div className="relative w-full lg:w-auto">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/60 w-4 h-4" />
                   <Input
                     placeholder="Search tasks..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10 w-64"
+                    className="pl-10 w-full lg:w-64 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus-visible:ring-2 focus-visible:ring-white/30"
                   />
                 </div>
-                <Button variant="outline" size="sm">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white flex-shrink-0"
+                >
                   <Filter className="w-4 h-4 mr-2" />
                   Filters
                 </Button>
@@ -152,13 +156,13 @@ export default function Tasks() {
         {viewMode === "board" ? (
           <TaskBoard />
         ) : (
-          <Card className="shadow-lg border-0 bg-white">
+          <Card className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-300">
             <CardContent className="p-6">
               <div className="text-center py-12">
-                <div className="text-gray-400 text-sm">
+                <div className="text-white/60 text-sm">
                   List view coming soon
                 </div>
-                <div className="text-gray-500 text-xs mt-2">
+                <div className="text-white/70 text-xs mt-2">
                   Switch to board view to manage tasks
                 </div>
               </div>

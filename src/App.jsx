@@ -22,11 +22,29 @@ import BlogPage from "./app/marketing/BlogPage";
 
 /* Dashboard Pages */
 import SubscriberDashboard from "./app/dashboard/subscriber/SubscriberDashboard";
+import SubSubscriberDashboard from "./app/dashboard/sub-subscriber/SubSubscriberDashboard";
 import Analytics from "./app/dashboard/subscriber/Analytics";
 import Leads from "./app/dashboard/subscriber/Leads";
 import Tickets from "./app/dashboard/subscriber/Tickets";
 import Calendar from "./app/dashboard/subscriber/Calendar";
 import Tasks from "./app/dashboard/subscriber/Tasks";
+import AdminDashboard from "./app/dashboard/admin/AdminDashboard";
+import Categories from "./app/dashboard/admin/Categories";
+import CategoryLeads from "./app/dashboard/admin/CategoryLeads";
+import AdminPlaceholder from "./app/dashboard/admin/AdminPlaceholder";
+import LeadReplacement from "./app/dashboard/admin/LeadReplacement";
+import Products from "./app/dashboard/admin/Products";
+import TicketPage from "./app/dashboard/admin/TicketPage";
+import Users from "./app/dashboard/admin/Users";
+import Enquiries from "./app/dashboard/admin/Enquiries";
+
+// Sub-Subscriber Pages
+import SubSubscriberLeads from "./app/dashboard/sub-subscriber/Leads";
+import LeadDetails from "./app/dashboard/sub-subscriber/LeadDetails";
+import SubSubscriberTasks from "./app/dashboard/sub-subscriber/Tasks";
+import SubSubscriberTaskDetails from "./app/dashboard/sub-subscriber/TaskDetails";
+import SubSubscriberTickets from "./app/dashboard/sub-subscriber/Tickets";
+import SubSubscriberCalendar from "./app/dashboard/sub-subscriber/Calendar";
 
 // Theme-matching loader component
 const ThemeLoader = () => {
@@ -152,11 +170,38 @@ function AppContent() {
       <Route path="/dashboard" element={<DashboardLayout />}>
         <Route path="" element={<SubscriberDashboard />} />
         <Route path="subscriber" element={<SubscriberDashboard />} />
+        <Route path="sub-subscriber" element={<SubSubscriberDashboard />} />
+        <Route path="sub-subscriber/leads" element={<SubSubscriberLeads />} />
+        <Route path="sub-subscriber/leads/:id" element={<LeadDetails />} />
+        <Route path="sub-subscriber/tasks" element={<SubSubscriberTasks />} />
+        <Route
+          path="sub-subscriber/tasks/:id"
+          element={<SubSubscriberTaskDetails />}
+        />
+        <Route
+          path="sub-subscriber/tickets"
+          element={<SubSubscriberTickets />}
+        />
+        <Route
+          path="sub-subscriber/calendar"
+          element={<SubSubscriberCalendar />}
+        />
         <Route path="subscriber/analytics" element={<Analytics />} />
         <Route path="subscriber/leads" element={<Leads />} />
         <Route path="subscriber/tickets" element={<Tickets />} />
         <Route path="subscriber/calendar" element={<Calendar />} />
         <Route path="subscriber/tasks" element={<Tasks />} />
+        <Route path="admin" element={<AdminDashboard />} />
+        <Route path="admin/categories" element={<Categories />} />
+        <Route
+          path="admin/categories/:categorySlug"
+          element={<CategoryLeads />}
+        />
+        <Route path="admin/lead-replacement" element={<LeadReplacement />} />
+        <Route path="admin/products" element={<Products />} />
+        <Route path="admin/tickets" element={<TicketPage />} />
+        <Route path="admin/users" element={<Users />} />
+        <Route path="admin/enquiries" element={<Enquiries />} />
       </Route>
     </Routes>
   );

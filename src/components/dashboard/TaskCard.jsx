@@ -2,9 +2,14 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Badge } from "../ui/badge";
 import { Card, CardContent } from "../ui/card";
-import { Calendar, Flag, GripVertical } from "lucide-react";
+import { Calendar, Flag } from "lucide-react";
 
-export default function TaskCard({ task, isOverlay = false }) {
+export default function TaskCard({
+  task,
+  isOverlay = false,
+  disableDrag = false,
+  onClick,
+}) {
   const {
     attributes,
     listeners,
@@ -21,9 +26,9 @@ export default function TaskCard({ task, isOverlay = false }) {
   };
 
   const priorityColors = {
-    High: "bg-red-100 text-red-700 border-red-200",
-    Medium: "bg-yellow-100 text-yellow-700 border-yellow-200",
-    Low: "bg-green-100 text-green-700 border-green-200",
+    High: "bg-red-500/20 text-red-200 border border-white/10",
+    Medium: "bg-yellow-500/20 text-yellow-200 border border-white/10",
+    Low: "bg-green-500/20 text-green-200 border border-white/10",
   };
 
   const formatDate = (dateString) => {
@@ -39,21 +44,22 @@ export default function TaskCard({ task, isOverlay = false }) {
     <Card
       ref={setNodeRef}
       style={style}
-      className={`mb-3 transition-all duration-200 ${
-        isDragging ? "rotate-2 scale-105 shadow-xl" : "hover:shadow-md"
-      } ${isOverlay ? "rotate-3 scale-105" : ""}`}
-      {...attributes}
-      {...listeners}
+      className={`mb-3 bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg transition-shadow duration-200 ${
+        isDragging ? "shadow-2xl" : "hover:shadow-xl"
+      } ${isOverlay ? "shadow-2xl" : ""}`}
+      {...(disableDrag ? {} : attributes)}
+      {...(disableDrag ? {} : listeners)}
+      onClick={onClick}
     >
       <CardContent className="p-4">
         {/* Task Header with Priority */}
         <div className="flex items-start justify-between mb-2">
           <div className="flex-1">
-            <h3 className="font-semibold text-gray-900 text-sm leading-tight">
+            <h3 className="font-semibold text-white text-sm leading-tight">
               {task.title}
             </h3>
             {task.description && (
-              <p className="text-xs text-gray-600 line-clamp-2 mt-1">
+              <p className="text-xs text-white/70 line-clamp-2 mt-1">
                 {task.description}
               </p>
             )}
@@ -65,18 +71,18 @@ export default function TaskCard({ task, isOverlay = false }) {
         </div>
 
         {/* Task Metadata */}
-        <div className="flex items-center justify-between text-xs text-gray-500">
+        <div className="flex items-center justify-between text-xs text-white/60">
           {task.dueDate && (
             <div className="flex items-center gap-1">
               <Calendar className="w-3 h-3" />
-              <span>{task.dueDate}</span>
+              <span>{formatDate(task.dueDate)}</span>
             </div>
           )}
 
           {task.assignedTo && (
             <div className="flex items-center gap-1">
-              <div className="w-4 h-4 bg-blue-100 rounded-full flex items-center justify-center">
-                <span className="text-xs font-medium text-blue-600">
+              <div className="w-4 h-4 bg-white/10 border border-white/20 rounded-full flex items-center justify-center">
+                <span className="text-xs font-medium text-white/80">
                   {task.assignedTo.charAt(0).toUpperCase()}
                 </span>
               </div>

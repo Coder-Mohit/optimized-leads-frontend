@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import {
   ChevronLeft,
   ChevronRight,
+  X,
   Layout,
   BarChart3,
   Users,
@@ -54,21 +55,42 @@ const sidebarMenuItems = [
 
 export default function Sidebar({
   isCollapsed,
+  isOpen,
   onToggle,
+  onClose,
+  isMobile = false,
   activeItem = "dashboard",
+  menuItems,
 }) {
+  const items = menuItems ?? sidebarMenuItems;
+
   return (
     <div
-      className={`bg-white/10 backdrop-blur-xl border-r border-white/20 transition-all duration-500 ease-in-out shadow-2xl h-screen flex flex-col ${
-        isCollapsed ? "w-16" : "w-64"
-      }`}
+      className={`
+    bg-white/10 backdrop-blur-xl border-r border-white/20
+    shadow-2xl h-screen flex flex-col
+    transition-transform duration-300 ease-in-out
+    ${isCollapsed ? "w-20" : "w-64"}
+
+    ${
+      isMobile
+        ? `fixed inset-y-0 left-0 z-50
+         ${isOpen ? "translate-x-0" : "-translate-x-full"}`
+        : "relative translate-x-0"
+    }
+  `}
     >
       {/* Sidebar Header */}
-      <div className="p-4 border-b border-white/20 flex-shrink-0">
-        <div className="flex items-center justify-between">
+      <div className="p-4 border-b border-white/20 flex-shrink-0 h-16 flex items-center">
+        <div
+          className={`w-full flex items-center ${
+            isCollapsed ? "justify-between" : "justify-between"
+          }`}
+        >
+          {isCollapsed && <div className="w-10" />}
           {!isCollapsed && (
             <div className="flex items-center gap-2 animate-fade-in">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-600 rounded-xl flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform duration-300">
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-600 rounded-xl flex items-center justify-center shadow-lg transition-transform duration-300">
                 <img
                   src="/logo.png"
                   alt="Optimized Leads"
@@ -82,96 +104,133 @@ export default function Sidebar({
               </div>
             </div>
           )}
-          <button
-            onClick={onToggle}
-            className="p-2 rounded-xl hover:bg-white/20 transition-all duration-300 transform hover:scale-105 group"
-          >
-            {isCollapsed ? (
-              <ChevronRight className="w-5 h-5 text-white/80 group-hover:text-white transition-colors duration-300" />
-            ) : (
-              <ChevronLeft className="w-5 h-5 text-white/80 group-hover:text-white transition-colors duration-300" />
+
+          <div className="flex items-center gap-1">
+            {/* Mobile Close Button */}
+            {isMobile && (
+              <button
+                onClick={onClose}
+                className="p-2 rounded-xl hover:bg-white/20 transition-all duration-300 group"
+              >
+                <X className="w-5 h-5 text-white/80 group-hover:text-white transition-colors duration-300" />
+              </button>
             )}
-          </button>
+
+            {/* Desktop Toggle Button */}
+            {!isMobile && (
+              <button
+                onClick={onToggle}
+                className="p-2 rounded-xl hover:bg-white/20 transition-all duration-300 group"
+              >
+                {isCollapsed ? (
+                  <ChevronRight className="w-5 h-5 text-white/80 group-hover:text-white transition-colors duration-300" />
+                ) : (
+                  <ChevronLeft className="w-5 h-5 text-white/80 group-hover:text-white transition-colors duration-300" />
+                )}
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
       {/* Navigation Menu */}
-      <nav className="p-4 flex-1 overflow-y-auto">
-        <ul className="space-y-2">
-          {sidebarMenuItems.map((item, index) => {
-            const Icon = item.icon;
-            return (
-              <li
-                key={item.id}
-                className="transform transition-all duration-300"
-                style={{ animationDelay: `${index * 100}ms` }}
+      <nav
+        className={`flex-1 p-4 space-y-2 overflow-y-auto no-scrollbar ${isCollapsed ? "px-2" : ""}`}
+      >
+        {items.map((item, index) => {
+          const Icon = item.icon;
+          const isActive = activeItem === item.id;
+
+          return (
+            <NavLink
+              key={item.id}
+              to={item.href}
+              onClick={() => isMobile && onClose()}
+              className={({ isActive }) =>
+                `
+    flex items-center rounded-xl transition-all duration-300 group
+    ${
+      isCollapsed ? "justify-center px-0 py-2" : "gap-3 px-3 py-2 justify-start"
+    }
+    ${
+      isActive
+        ? "bg-gradient-to-r from-blue-500/20 to-purple-600/20 border border-white/20"
+        : "hover:bg-white/10"
+    }
+  `
+              }
+              style={{
+                animationDelay: `${index * 100}ms`,
+              }}
+            >
+              <div
+                className={`
+    w-10 h-10 flex items-center justify-center
+    flex-shrink-0
+    rounded-lg transition-all duration-300
+    ${
+      isActive
+        ? "bg-gradient-to-br from-blue-400/20 to-purple-600/20"
+        : "bg-white/5 group-hover:bg-white/10"
+    }
+  `}
               >
-                <NavLink
-                  to={item.href}
-                  className={({ isActive }) =>
-                    `group flex items-center gap-3 px-3 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 relative overflow-hidden ${
-                      isActive
-                        ? "bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-white shadow-lg border border-white/20"
-                        : "text-white/70 hover:bg-white/10 hover:text-white hover:shadow-md"
-                    }`
-                  }
+                <Icon
+                  className={`w-5 h-5 transition-colors duration-300 ${
+                    isActive
+                      ? "text-blue-300"
+                      : "text-white/60 group-hover:text-white"
+                  }`}
+                />
+              </div>
+              {!isCollapsed && (
+                <span
+                  className={`font-medium transition-all duration-300 ${
+                    isActive
+                      ? "text-white"
+                      : "text-white/70 group-hover:text-white"
+                  }`}
                 >
-                  {/* Active indicator */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                  <Icon
-                    className={`w-5 h-5 flex-shrink-0 relative z-10 transition-all duration-300 ${
-                      item.id === activeItem
-                        ? "text-white scale-110"
-                        : "group-hover:scale-110"
-                    }`}
-                  />
-                  {!isCollapsed && (
-                    <span className="font-medium relative z-10 transition-all duration-300">
-                      {item.label}
-                    </span>
-                  )}
-
-                  {/* Subtle glow effect */}
-                  {item.id === activeItem && (
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-purple-400/20 blur-md"></div>
-                  )}
-                </NavLink>
-              </li>
-            );
-          })}
-        </ul>
+                  {item.label}
+                </span>
+              )}
+            </NavLink>
+          );
+        })}
       </nav>
 
-      {/* User Section - Fixed at Bottom */}
+      {/* User Section */}
       <div className="p-4 border-t border-white/20 flex-shrink-0">
-        {!isCollapsed ? (
-          <div className="space-y-3 animate-fade-in">
-            <div className="flex items-center gap-3 group">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-600 rounded-full flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-all duration-300">
-                <User className="w-5 h-5 text-white" />
-              </div>
-              <div className="flex-1">
-                <div className="text-sm font-semibold text-white">John Doe</div>
-                <div className="text-xs text-white/60">john@example.com</div>
-              </div>
-            </div>
-
-            <button className="w-full flex items-center gap-3 px-4 py-3 text-sm text-white/80 hover:text-white hover:bg-gradient-to-r hover:from-red-500/20 hover:to-orange-500/20 rounded-xl transition-all duration-300 transform hover:scale-105 border border-white/10 hover:border-red-400/30 group">
-              <LogOut className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300" />
-              <span>Logout</span>
-            </button>
+        <div
+          className={`p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-all duration-300 group ${
+            isCollapsed
+              ? "flex flex-col items-center gap-3"
+              : "flex items-center gap-3 justify-between"
+          }`}
+        >
+          <div
+            className={`${isCollapsed ? "w-12 h-12" : "w-10 h-10"} flex-shrink-0 bg-gradient-to-br from-green-400 to-blue-600 rounded-full flex items-center justify-center shadow-lg`}
+          >
+            <User className="w-4 h-4 text-white" />
           </div>
-        ) : (
-          <div className="space-y-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-600 rounded-full flex items-center justify-center mx-auto shadow-lg transform hover:scale-110 transition-all duration-300">
-              <User className="w-5 h-5 text-white" />
+          {!isCollapsed && (
+            <div className="flex-1">
+              <p className="text-sm font-medium text-white">John Doe</p>
+              <p className="text-xs text-white/60">Premium User</p>
             </div>
-            <button className="w-full flex items-center justify-center p-3 text-white/80 hover:text-white hover:bg-gradient-to-r hover:from-red-500/20 hover:to-orange-500/20 rounded-xl transition-all duration-300 transform hover:scale-105 border border-white/10 hover:border-red-400/30">
-              <LogOut className="w-4 h-4 hover:rotate-12 transition-transform duration-300" />
+          )}
+          {!isMobile && (
+            <button
+              className={`p-2 rounded-lg hover:bg-white/20 transition-all duration-300 group ${
+                isCollapsed ? "w-10 h-10 flex items-center justify-center" : ""
+              }`}
+              aria-label="Logout"
+              type="button"
+            >
+              <LogOut className="w-4 h-4 text-white/60 group-hover:text-white" />
             </button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );
