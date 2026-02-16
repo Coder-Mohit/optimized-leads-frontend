@@ -4,7 +4,7 @@ import Sidebar from "../components/dashboard/Sidebar";
 import Topbar from "../components/dashboard/Topbar";
 import { Layout, Users, Package, Ticket } from "lucide-react";
 import { Layers, Repeat2, Mail } from "lucide-react";
-import { CheckCircle, Calendar } from "lucide-react";
+import { CheckCircle, Calendar, Clock } from "lucide-react";
 
 export default function DashboardLayout() {
   const location = useLocation();
@@ -95,6 +95,51 @@ export default function DashboardLayout() {
     },
   ];
 
+  const subscriberMenuItems = [
+    {
+      id: "dashboard",
+      label: "Dashboard",
+      icon: Layout,
+      href: "/dashboard/subscriber",
+    },
+    {
+      id: "analytics",
+      label: "Analytics",
+      icon: Layout,
+      href: "/dashboard/subscriber/analytics",
+    },
+    {
+      id: "leads",
+      label: "Leads",
+      icon: Users,
+      href: "/dashboard/subscriber/leads",
+    },
+    {
+      id: "tickets",
+      label: "Tickets",
+      icon: Ticket,
+      href: "/dashboard/subscriber/tickets",
+    },
+    {
+      id: "calendar",
+      label: "Calendar",
+      icon: Calendar,
+      href: "/dashboard/subscriber/calendar",
+    },
+    {
+      id: "tasks",
+      label: "Tasks",
+      icon: CheckCircle,
+      href: "/dashboard/subscriber/tasks",
+    },
+    {
+      id: "attendance",
+      label: "Manage Attendance",
+      icon: Clock,
+      href: "/dashboard/subscriber/attendance",
+    },
+  ];
+
   const getActiveItem = () => {
     if (isAdmin) {
       const p = location.pathname;
@@ -123,6 +168,7 @@ export default function DashboardLayout() {
     if (p.includes("/subscriber/tickets")) return "tickets";
     if (p.includes("/subscriber/calendar")) return "calendar";
     if (p.includes("/subscriber/tasks")) return "tasks";
+    if (p.includes("/subscriber/attendance")) return "attendance";
     return "dashboard";
   };
 
@@ -232,7 +278,7 @@ export default function DashboardLayout() {
               ? adminMenuItems
               : isSubSubscriber
                 ? subSubscriberMenuItems
-                : undefined
+                : subscriberMenuItems
           }
         />
       </div>

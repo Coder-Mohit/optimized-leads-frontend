@@ -8,6 +8,8 @@ import IndustriesCTASection from "../../components/marketing/IndustriesCTASectio
 import StepsSection from "../../components/marketing/StepsSection";
 import ContactForm from "../../components/common/ContactForm";
 import FinalCTASection from "../../components/marketing/FinalCTASection";
+import { useProductsByCategory } from "../../hooks/useProducts";
+import { transformProductsToPlans } from "../../utils/productTransform";
 
 export const buyerLeadsServices = [
   {
@@ -197,60 +199,17 @@ const buyerLeadsFeatures = [
   },
 ];
 
-export const buyerLeadsPlans = [
-  {
-    name: "Basic Plan",
-    price: "15,000",
-    description: "Buyer Leads Subscription – Grow Your Sales Pipeline Fast!",
-    icon: Zap,
-    iconBg: "bg-blue-600",
-    features: [
-      "Dedicated Dashboard",
-      "Account Manager",
-      "24×7 Leads Support",
-      "Sales Assistant",
-    ],
-    button: "Get Started with Basic",
-    link: "/product_details/?id=1",
-  },
-  {
-    name: "Premium Plan",
-    price: "25,000",
-    description: "Premium Buyer Leads Subscription Plan",
-    popular: true,
-    icon: Crown,
-    iconBg: "bg-gradient-to-br from-indigo-500 to-purple-600",
-    features: [
-      "Premium Dashboard Access",
-      "Dedicated Account Manager",
-      "24×7 Priority Support",
-      "Sales Assistant Support",
-      "Performance Analytics Report",
-      "Verified & Nurtured Leads",
-    ],
-    button: "Get Started with Premium",
-    link: "/product_details/?id=2",
-  },
-  {
-    name: "Pro Plan",
-    price: "20,000",
-    description: "Pro Buyer Leads Subscription Plan",
-    icon: Star,
-    iconBg: "bg-blue-700",
-    features: [
-      "Dedicated Dashboard Access",
-      "Personal Account Manager",
-      "24×7 Lead Support",
-      "Sales Assistant Support",
-      "Verified & Nurtured Leads",
-      "Performance Insights",
-    ],
-    button: "Get Started with Pro",
-    link: "/product_details/?id=3",
-  },
-];
-
 export default function BuyerLeadsPage() {
+  // Fetch products for "Buyers Leads" category
+  const {
+    data: products,
+    isLoading,
+    error,
+  } = useProductsByCategory("Buyers Leads");
+
+  // Transform API data to match expected format
+  const buyerLeadsPlans = transformProductsToPlans(products);
+
   return (
     <main>
       <BuyerLeadsHero />
@@ -271,8 +230,10 @@ export default function BuyerLeadsPage() {
         subtitle="Choose the perfect plan for your real estate business and start connecting with qualified property buyers today."
         plans={buyerLeadsPlans}
         bg="bg-white"
+        isLoading={isLoading}
+        error={error}
       />
-      <ContactForm industry="Real Estate (Buyers Leads)" />
+      <ContactForm industry="real_estate" />
       <FinalCTASection />
     </main>
   );

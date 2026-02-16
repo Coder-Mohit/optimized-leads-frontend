@@ -4,21 +4,22 @@ import { useState, useEffect } from "react";
 /* Layouts */
 import MarketingLayout from "./layouts/MarketingLayout";
 import DashboardLayout from "./layouts/DashboardLayout";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 /* Marketing Pages */
-import HomePage from "./app/marketing/HomePage";
-import StudyAbroadPage from "./app/marketing/StudyAbroadPage";
-import ForexMarketPage from "./app/marketing/ForexMarketPage";
-import BuyerLeadsPage from "./app/marketing/BuyerLeadsPage";
-import TenantLeadsPage from "./app/marketing/TenantLeadsPage";
-import OnlineMBAServicePage from "./app/marketing/OnlineMBAServicePage";
-import CertificationPage from "./app/marketing/CertificationPage";
-import PhDPage from "./app/marketing/PhDPage";
-import AboutPage from "./app/marketing/AboutPage";
-import ContactPage from "./app/marketing/ContactPage";
-import LoginPage from "./app/marketing/LoginPage";
-import StartFreeTrialPage from "./app/marketing/StartFreeTrialPage";
-import BlogPage from "./app/marketing/BlogPage";
+import HomePage from "./pages/marketing/HomePage";
+import StudyAbroadPage from "./pages/marketing/StudyAbroadPage";
+import ForexMarketPage from "./pages/marketing/ForexMarketPage";
+import BuyerLeadsPage from "./pages/marketing/BuyerLeadsPage";
+import TenantLeadsPage from "./pages/marketing/TenantLeadsPage";
+import OnlineMBAServicePage from "./pages/marketing/OnlineMBAServicePage";
+import CertificationPage from "./pages/marketing/CertificationPage";
+import PhDPage from "./pages/marketing/PhDPage";
+import AboutPage from "./pages/marketing/AboutPage";
+import ContactPage from "./pages/marketing/ContactPage";
+import LoginPage from "./pages/marketing/LoginPage";
+import StartFreeTrialPage from "./pages/marketing/StartFreeTrialPage";
+import BlogPage from "./pages/marketing/BlogPage";
 
 /* Dashboard Pages */
 import SubscriberDashboard from "./app/dashboard/subscriber/SubscriberDashboard";
@@ -28,6 +29,8 @@ import Leads from "./app/dashboard/subscriber/Leads";
 import Tickets from "./app/dashboard/subscriber/Tickets";
 import Calendar from "./app/dashboard/subscriber/Calendar";
 import Tasks from "./app/dashboard/subscriber/Tasks";
+import ManageAttendance from "./app/dashboard/subscriber/ManageAttendance";
+import ViewAttendance from "./app/dashboard/subscriber/ViewAttendance";
 import AdminDashboard from "./app/dashboard/admin/AdminDashboard";
 import Categories from "./app/dashboard/admin/Categories";
 import CategoryLeads from "./app/dashboard/admin/CategoryLeads";
@@ -166,8 +169,15 @@ function AppContent() {
         <Route path="/start_free_trial" element={<StartFreeTrialPage />} />
       </Route>
 
-      {/* DASHBOARD */}
-      <Route path="/dashboard" element={<DashboardLayout />}>
+      {/* DASHBOARD - PROTECTED */}
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <DashboardLayout />
+          </ProtectedRoute>
+        }
+      >
         <Route path="" element={<SubscriberDashboard />} />
         <Route path="subscriber" element={<SubscriberDashboard />} />
         <Route path="sub-subscriber" element={<SubSubscriberDashboard />} />
@@ -191,6 +201,8 @@ function AppContent() {
         <Route path="subscriber/tickets" element={<Tickets />} />
         <Route path="subscriber/calendar" element={<Calendar />} />
         <Route path="subscriber/tasks" element={<Tasks />} />
+        <Route path="subscriber/attendance" element={<ManageAttendance />} />
+        <Route path="subscriber/attendance/:id" element={<ViewAttendance />} />
         <Route path="admin" element={<AdminDashboard />} />
         <Route path="admin/categories" element={<Categories />} />
         <Route
@@ -210,9 +222,35 @@ function AppContent() {
 export default function App() {
   const [showLoader, setShowLoader] = useState(() => {
     try {
-      return localStorage.getItem("optimizedleads_loader_seen") !== "1";
+      // Check if this is a page reload (not in-app navigation)
+      const navigationEntries = performance.getEntriesByType("navigation");
+      const lastNavigation = navigationEntries[navigationEntries.length - 1];
+
+      // Show loader if:
+      // 1. First time visit (no navigation entries)
+      // 2. Page reload (type === 'reload' or type === 1)
+      // 3. Direct navigation (not from same origin)
+
+      if (!lastNavigation) {
+        return true; // First visit
+      }
+
+      // Check if it's a reload or direct navigation
+      if (lastNavigation.type === "reload" || lastNavigation.type === 1) {
+        return true;
+      }
+
+      // Check if it's not same-origin navigation (likely new tab/direct access)
+      if (
+        lastNavigation.transferSize === 0 &&
+        lastNavigation.encodedBodySize === 0
+      ) {
+        return true;
+      }
+
+      return false; // In-app navigation, no loader
     } catch {
-      return true;
+      return true; // Fallback: show loader if error
     }
   });
 
@@ -221,11 +259,6 @@ export default function App() {
 
     const timer = setTimeout(() => {
       setShowLoader(false);
-      try {
-        localStorage.setItem("optimizedleads_loader_seen", "1");
-      } catch {
-        // ignore
-      }
     }, 4000);
 
     return () => clearTimeout(timer);

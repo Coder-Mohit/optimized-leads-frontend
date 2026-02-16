@@ -8,6 +8,9 @@ import { Zap } from "lucide-react";
 import { Target } from "lucide-react";
 import ContactForm from "../../components/common/ContactForm";
 import WhyPartnerWithOptimizedLeads from "../../components/studyAbroad/WhyPartnerWithOptimizedLeads";
+import { useProductsByCategory } from "../../hooks/useProducts";
+import PricingSection from "../../components/common/PricingSection";
+import { Crown, Star } from "lucide-react";
 
 /* ---------------- DATA ---------------- */
 
@@ -279,6 +282,40 @@ const features = [
 /* ---------------- PAGE ---------------- */
 
 export default function CertificationPage() {
+  // Fetch products for "Certification" category
+  const {
+    data: products,
+    isLoading,
+    error,
+  } = useProductsByCategory("Certification");
+
+  // Transform API data to match expected format
+  const certificationPlans =
+    products?.map((product, index) => ({
+      id: product.id,
+      name: product.name || `Plan ${index + 1}`,
+      price: product.price?.toString() || "18,000",
+      description:
+        product.description ||
+        "Certification Leads Subscription – Connect with Career Professionals!",
+      icon: index === 1 ? Crown : index === 2 ? Star : Zap,
+      iconBg:
+        index === 1
+          ? "bg-gradient-to-br from-indigo-500 to-purple-600"
+          : index === 2
+            ? "bg-blue-700"
+            : "bg-blue-600",
+      popular: index === 1,
+      features: product.features || [
+        "Dedicated Dashboard",
+        "Account Manager",
+        "24×7 Leads Support",
+        "Professional Verification",
+      ],
+      button: `Get Started with ${product.name || `Plan ${index + 1}`}`,
+      link: `/product_details/?id=${product.id}`,
+    })) || [];
+
   return (
     <main>
       <CertificationHero />
@@ -300,7 +337,15 @@ export default function CertificationPage() {
         subtitle="Our proven 6-step process ensures you receive only the highest quality, career-focused professionals ready for certification programs."
       />
       <PartnerSuccessStories stories={certificationPartnerStories} />
-      <ContactForm industry="Education (Certification)" />
+      <PricingSection
+        title="Professional Certification Leads Pricing"
+        subtitle="Choose the perfect plan for your consultancy and start connecting with career professionals today."
+        plans={certificationPlans}
+        bg="bg-white"
+        isLoading={isLoading}
+        error={error}
+      />
+      <ContactForm industry="education" />
       <WhyPartnerWithOptimizedLeads features={features} />
     </main>
   );

@@ -6,6 +6,7 @@ import PartnerSuccessStories from "../../components/studyAbroad/PartnerSuccessSt
 import ContactForm from "../../components/common/ContactForm";
 import WhyPartnerWithOptimizedLeads from "../../components/studyAbroad/WhyPartnerWithOptimizedLeads";
 import { Zap, Crown, Star, Target, ShieldCheck, BarChart3 } from "lucide-react";
+import { useProductsByCategory } from "../../hooks/useProducts";
 
 const forexServices = [
   {
@@ -195,66 +196,54 @@ const forexFeatures = [
   },
 ];
 
-export const forexPlans = [
-  {
-    name: "Basic Plan",
-    price: "19,999",
-    description: "Buyer Leads Subscription – India",
-    icon: Zap,
-    iconBg: "bg-blue-600",
-    features: [
-      "100% Indian Market Focus",
-      "Verified Trading Interest",
-      "Real-Time Dashboard",
-      "Campaign Support",
-    ],
-    button: "Get Started",
-  },
-  {
-    name: "Premium Plan",
-    price: "28,999",
-    description: "Premium Forex Leads (India)",
-    popular: true,
-    icon: Crown,
-    iconBg: "bg-gradient-to-br from-indigo-500 to-purple-600",
-    features: [
-      "High Intent Traders",
-      "WhatsApp & Email Verified",
-      "Live Dashboard Access",
-      "Campaign Optimization",
-    ],
-    button: "Start Premium",
-  },
-  {
-    name: "Platinum Plan",
-    price: "110,000",
-    description: "Dubai Forex Leads (Exclusive)",
-    icon: Star,
-    iconBg: "bg-blue-700",
-    features: [
-      "Ready-to-Invest Traders",
-      "Exclusive Leads",
-      "Dedicated Manager",
-      "Priority Delivery",
-    ],
-    button: "Contact Sales",
-  },
-];
-
 export default function ForexMarketPage() {
+  // Fetch products for "Forex Market" category
+  const {
+    data: products,
+    isLoading,
+    error,
+  } = useProductsByCategory("Forex Market");
+
+  // Transform API data to match expected format
+  const forexPlans =
+    products?.map((product, index) => ({
+      id: product.id,
+      name: product.name || `Plan ${index + 1}`,
+      price: product.price?.toString() || "19,999",
+      description:
+        product.description ||
+        "Forex Trader Leads Subscription – Connect with Active Traders!",
+      icon: index === 1 ? Crown : index === 2 ? Star : Zap,
+      iconBg:
+        index === 1
+          ? "bg-gradient-to-br from-indigo-500 to-purple-600"
+          : index === 2
+            ? "bg-blue-700"
+            : "bg-blue-600",
+      popular: index === 1,
+      features: product.features || [
+        "Dedicated Dashboard",
+        "Account Manager",
+        "24×7 Leads Support",
+        "Trader Verification",
+      ],
+      button: `Get Started with ${product.name || `Plan ${index + 1}`}`,
+      link: `/product_details/?id=${product.id}`,
+    })) || [];
+
   return (
     <main>
       <ForexHero />
       <ServicesSection
         title="💹 Complete Forex Trader Lead Generation Solutions"
-        subtitle="We provide end-to-end forex trader lead generation services specifically designed for forex brokers and trading platforms."
+        subtitle="We provide end-to-end forex trader lead generation services specifically designed for financial brokers and trading platforms."
         services={forexServices}
         bg="bg-gray-50"
       />
       <HowItWorks
         steps={forexSteps}
         title="⚡ How Our Forex Trader Lead Generation Works"
-        subtitle="Our proven 6-step process ensures you receive only the highest quality, experience-verified traders ready to invest."
+        subtitle="Our proven 6-step process ensures you receive only the highest quality, investment-ready traders ready to start trading."
       />
       <PartnerSuccessStories stories={forexStories} />
       <PricingSection
@@ -262,8 +251,10 @@ export default function ForexMarketPage() {
         subtitle="Choose the perfect plan for your forex trading business and start connecting with qualified traders today."
         plans={forexPlans}
         bg="bg-white"
+        isLoading={isLoading}
+        error={error}
       />
-      <ContactForm industry="Financial Services (Forex Trading)" />
+      <ContactForm industry="forex_market" />
       <WhyPartnerWithOptimizedLeads features={forexFeatures} />
     </main>
   );

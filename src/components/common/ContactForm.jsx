@@ -1,12 +1,12 @@
 import { useState } from "react";
+import contactService from "../../services/contactService";
 
 const INDUSTRY_OPTIONS = [
-  "Real Estate",
-  "Study Abroad",
-  "Education",
-  "Job Consultancy",
-  "Forex Market",
-  "Other",
+  ["real_estate", "Real Estate"],
+  ["study_abroad", "Study Abroad"],
+  ["education", "Education"],
+  ["job_consultancy", "Job Consultancy"],
+  ["forex_market", "Forex Market"],
 ];
 
 export default function ContactForm({
@@ -22,11 +22,13 @@ export default function ContactForm({
   });
 
   const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   /* ---------------- HANDLERS ---------------- */
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    // Clear error for this specific field
     setErrors({ ...errors, [e.target.name]: "" });
   };
 
@@ -55,11 +57,78 @@ export default function ContactForm({
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
 
     console.log("Form Submitted:", form);
+
+    try {
+      setIsSubmitting(true);
+
+      // Prepare data for API
+      const contactData = {
+        full_name: form.name,
+        email: form.email,
+        phone_number: form.phone,
+        industry: form.industry,
+        message: form.message,
+      };
+
+      console.log("Submitting contact form:", contactData);
+
+      // Call contact service
+      const response = await contactService.submitContact(contactData);
+      console.log("Contact form submitted successfully:", response);
+
+      // Show success message
+      alert("Thank you for your message! We'll get back to you soon.");
+
+      // Reset form
+      setForm({
+        name: "",
+        email: "",
+        phone: "",
+        industry: industry || "",
+        message: "",
+      });
+    } catch (error) {
+      console.error("Contact form submission error:", error);
+
+      // Handle field-specific errors
+      if (error.fieldErrors) {
+        console.log("Field-specific errors:", error.fieldErrors);
+
+        // Map field errors to form state
+        const fieldErrorMapping = {
+          full_name: "name",
+          email: "email",
+          phone_number: "phone",
+          industry: "industry",
+          message: "message",
+        };
+
+        const newErrors = {};
+        Object.entries(error.fieldErrors).forEach(([field, messages]) => {
+          const formField = fieldErrorMapping[field];
+          if (formField) {
+            newErrors[formField] = Array.isArray(messages)
+              ? messages[0]
+              : messages;
+          }
+        });
+
+        setErrors(newErrors);
+        console.log("Set form errors:", newErrors);
+      } else {
+        // Handle general errors
+        alert(
+          error.message || "Failed to send message. Please try again later.",
+        );
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -108,7 +177,11 @@ export default function ContactForm({
               {industry ? (
                 <div className="relative">
                   <input
-                    value={industry}
+                    value={
+                      INDUSTRY_OPTIONS.find(
+                        ([value]) => value === industry,
+                      )?.[1] || industry
+                    }
                     disabled
                     className="w-full rounded-xl border border-gray-200 px-4 py-3 pr-10 bg-gray-50 text-gray-600 cursor-not-allowed"
                   />
@@ -131,9 +204,9 @@ export default function ContactForm({
                     `}
                   >
                     <option value="">Select your industry</option>
-                    {INDUSTRY_OPTIONS.map((opt) => (
-                      <option key={opt} value={opt}>
-                        {opt}
+                    {INDUSTRY_OPTIONS.map(([value, label]) => (
+                      <option key={value} value={value}>
+                        {label}
                       </option>
                     ))}
                   </select>
@@ -165,6 +238,7 @@ export default function ContactForm({
             {/* CTA */}
             <button
               type="submit"
+              disabled={isSubmitting}
               className="
                 w-full py-4 rounded-xl
                 bg-gradient-to-r from-blue-600 to-indigo-600
@@ -173,9 +247,12 @@ export default function ContactForm({
                 transition-all duration-300
                 hover:scale-105 hover:shadow-xl
                 active:scale-95
+                disabled:opacity-50 disabled:cursor-not-allowed
               "
             >
-              Send Message & Get Free Consultation
+              {isSubmitting
+                ? "Sending..."
+                : "Send Message & Get Free Consultation"}
             </button>
 
             <p className="text-center text-xs sm:text-sm text-gray-500 pt-2">

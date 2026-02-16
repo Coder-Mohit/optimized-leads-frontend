@@ -4,7 +4,10 @@ import ServicesSection from "../../components/studyAbroad/ServicesSection";
 import HowItWorks from "../../components/studyAbroad/HowItWorks";
 import PartnerSuccessStories from "../../components/studyAbroad/PartnerSuccessStories";
 import WhyPartnerWithOptimizedLeads from "../../components/studyAbroad/WhyPartnerWithOptimizedLeads";
-import { Target, ShieldCheck, BarChart3, Zap } from "lucide-react";
+import { Target, ShieldCheck, BarChart3, Zap, Crown, Star } from "lucide-react";
+import { useProductsByCategory } from "../../hooks/useProducts";
+import PricingSection from "../../components/common/PricingSection";
+import { transformProductsToPlans } from "../../utils/productTransform";
 
 const tenantLeadsServices = [
   {
@@ -195,6 +198,16 @@ const tenantLeadsFeatures = [
 ];
 
 export default function TenantLeadsPage() {
+  // Fetch products for "Tenant Leads" category
+  const {
+    data: products,
+    isLoading,
+    error,
+  } = useProductsByCategory("Tenant Leads");
+
+  // Transform API data to match expected format
+  const tenantLeadsPlans = transformProductsToPlans(products);
+
   return (
     <main>
       <TenantLeadsHero />
@@ -210,7 +223,15 @@ export default function TenantLeadsPage() {
         subtitle="Our proven 6-step process ensures you receive only the highest quality, budget-verified tenants ready to sign rental agreements."
       />
       <PartnerSuccessStories stories={tenantLeadsStories} />
-      <ContactForm industry="Real Estate (Tenant Leads)" />
+      <PricingSection
+        title="Rental Property Tenant Leads Pricing"
+        subtitle="Choose the perfect plan for your rental business and start connecting with qualified tenants today."
+        plans={tenantLeadsPlans}
+        bg="bg-white"
+        isLoading={isLoading}
+        error={error}
+      />
+      <ContactForm industry="real_estate" />
       <WhyPartnerWithOptimizedLeads features={tenantLeadsFeatures} />
     </main>
   );
